@@ -1,0 +1,29 @@
+/*.nav-custom{
+	background-color: red;
+}
+.input-edit{
+	background: none;
+	border: none;
+}
+.input-focus{
+	background: #FFF;
+}
+.content-list{
+	height: 400px;
+	overflow-y: scroll;
+}
+.image-container{
+	width: 100%;
+	height: 200px;
+	margin-top: 20px
+}
+.image-container img{
+	width: 100%;
+	height: 100%;
+}*/
+.jsrenglon{
+	width: 200px;
+}
+.jspartida{
+	width: 200px;
+}

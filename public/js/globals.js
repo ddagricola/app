@@ -1,0 +1,34 @@
+$primer_nombre = $("#primer_nombre");
+$segundo_nombre = $("#segundo_nombre");
+$tercer_nombre = $("#tercer_nombre");
+$primer_apellido = $("#primer_apellido");
+$segundo_apellido = $("#segundo_apellido");
+$apellido_casada = $("#apellido_casada");
+$fecha_nacimiento = $("#fecha_nacimiento");
+$estado_civil = $("#estado_civil");
+//$edad = $("#edad");
+$departamento_nacimiento = $("#departamento_nacimiento");
+$municipio_nacimiento = $("#municipio_nacimiento");
+$nacionalidad = $("#nacionalidad");
+$pueblo = $("#pueblo");
+$etnia = $("#etnia");
+$genero = $("#genero");
+$leer = $("#leer");
+$escribir = $("#escribir");
+$event = $("#event");
+$id = $("#id");
+$id_evento = $("#id_evento");
+function DetalleIntervencion(){
+	this.id_municipio = null;
+	this.id_medida = null;
+	/*this.id_fuente = null;
+	this.id_renglon = null;
+	this.id_partida = null;*/
+	this.cantidad = null;
+	this.cantidad_beneficiario = null;
+	this.precio = null;
+	this.beneficiario = null;
+	this.id = null;
+	this.state = null;
+	this.id_medida_entrega = null;
+}
