@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use Carbon\Carbon;
+use Auth;
 use App\Http\Controllers\Controller;
+use Request;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -49,8 +52,7 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:usuario',
             'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -64,9 +66,11 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'fecha_creacion'=>Carbon::now(),
+            'email_creacion'=> (Auth::check())? Auth::user()->email : 'admin@admin',
+            'ip_creacion'=>Request::ip()
         ]);
     }
 }
