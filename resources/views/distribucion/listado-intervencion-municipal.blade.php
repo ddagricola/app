@@ -23,7 +23,7 @@
                     <table id="grid-paises" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Intervención</th>
+                                <!--<th>Intervención</th>-->
                                 <th>Departamento</th>
                                 <th>Municipio</th>
                                 <th>Insumo</th>
@@ -34,7 +34,7 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th></th>
+                                <!--<th></th>-->
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -62,14 +62,14 @@ $(function(){
             "ajax": "{{ url('distribuciones/municipios/intervenciones/todo') }}"+"/"+{{$municipio->id}},
             "columnDefs": [ 
 
-                { "data": "orden", "targets": 0},
-                { "data": "departamento", "targets": 1},
-                { "data": "municipio", "targets": 2},
-                { "data": "insumo", "targets": 3},
-                { "data": "beneficiarios", "targets": 4},
-                { "data": "cantidad_por_beneficiario", "targets": 5},
+                //{ "data": "orden", "targets": 0},
+                { "data": "departamento", "targets": 0},
+                { "data": "municipio", "targets": 1},
+                { "data": "insumo", "targets": 2},
+                { "data": "beneficiarios", "targets": 3},
+                { "data": "cantidad_por_beneficiario", "targets": 4},
                 {
-                    "targets": 6,
+                    "targets": 5,
                     "data": "id_detalle_intervencion",
                     "render": function ( data, type, full, meta ) {
                         edit = "<a href='javascript:ingreso("+data+")' id='edit' class='btn btn-primary btn-sm' data-toggle='tooltip' data-placement='top' title='Eventos'><span class='glyphicon glyphicon-home' aria-hidden='true'></span></a>";

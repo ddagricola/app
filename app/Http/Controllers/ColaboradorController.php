@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Colaborador;
 use Auth;
 use Carbon\Carbon;
+use App\Jefatura;
 class ColaboradorController extends Controller
 {
     /**
@@ -18,6 +19,20 @@ class ColaboradorController extends Controller
     public function index()
     {
         //
+    }
+    public function listado(){
+        return view("colaborador.listado");
+    }
+
+    public function todo(Request $request){
+        if($request->ajax()){
+            $municipios = Colaborador::colaboradorJefatura();
+            return response()->json(["data"=>$municipios]);
+        }
+    }
+    public function nuevo(){
+        $jefaturas = Jefatura::whereEstado(1)->get();
+        return view("colaborador.nuevo",["jefaturas"=>$jefaturas]);
     }
 
     /**

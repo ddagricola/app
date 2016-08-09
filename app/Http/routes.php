@@ -67,7 +67,7 @@ Route::get('detalle-intervencion/detalle/{item}','DetalleIntervencionController@
 Route::get('detalle-intervencion/partida','DetalleIntervencionController@detallePartidaCodigo');
 Route::get('insumos/buscar/tipo/{id}','InsumoController@insumoTipoInsumo');
 Route::get("detalle-intervencion/export/{id}","DetalleIntervencionController@exportFromExcel");
-
+Route::get('puestos/todo','PuestoController@todo');
 /** clean **/
 Route::get('ben/todo','BeneficiarioController@todo');
 Route::get('pdf/{id}','BeneficiarioController@pdf');
@@ -91,6 +91,8 @@ Route::group(['prefix'=>'mantenimiento','middleware'=>'auth'], function(){
 	Route::resource('paises','PaisController');
 	Route::resource('departamentos','DepartamentoController');
 	Route::resource('municipios','MunicipioController');
+	Route::resource('puestos','PuestoController');
+
 	Route::resource('ministerios','MinisterioController');
 	Route::resource('direcciones','DireccionController');
 	Route::resource('programas','ProgramaController');
@@ -141,6 +143,16 @@ Route::group(['prefix'=>'movimiento','middleware'=>'auth'], function(){
 	Route::get('comunidad/todo-eventos/{id}','MovimientoController@todoEventoComunidad');
 	Route::get("beneficiarios/evento/{id}", "MovimientoController@eventoBeneficiarios");
 
+});
+
+Route::group(['prefix'=>'recepcion','middleware'=>'auth'], function(){
+	Route::get('jefatura/nuevo/{id}', 'ColaboradorVisitaController@nuevo');
+	Route::post('jefatura/guardar', 'ColaboradorVisitaController@guardar');
+	Route::get('jefatura/listado/{id}', 'ColaboradorVisitaController@indexVisita');
+
+	Route::get("colaboradores/nuevo", "ColaboradorController@nuevo");
+	Route::get("colaboradores/listado", "ColaboradorController@listado");
+	Route::get("colaboradores/todo", "ColaboradorController@todo");
 });
 
 Route::get("planilla", function(){

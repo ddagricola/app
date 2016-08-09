@@ -21,11 +21,11 @@
         <div class="row">
           <div class="col-md-4">
             <fieldset class="form-group">
-              <label for="pais">Comunidad</label>
+              <label for="pais">Lugar de entrega</label>
                 <select class="form-control select2" style="width: 100%;" name="id_comunidad">
-                  <option value="">Seleccione comunidad</option>
+                  <option value="">Seleccione lugar de entrega</option>
                   @foreach($comunidades as $comunidad)
-                    <option value="{{ $comunidad->id }}">{{$comunidad->nombre}}</option>
+                    <option value="{{ $comunidad->id }}">{{$comunidad->division}} - {{$comunidad->comunidad}}</option>
                   @endforeach
                 </select>
             </fieldset>
@@ -39,7 +39,7 @@
           <div class="col-md-4">
               <fieldset class="form-group">
                 <label for="departamento">Cantidad de Beneficiarios</label>
-                <input type="text" class="form-control" id="nbeneficiario" name="nbeneficiario" required>
+                <input onkeypress="return isNumberKey(event)" type="text" class="form-control" id="nbeneficiario" name="nbeneficiario" required>
               </fieldset>
           </div>
         </div>
@@ -53,12 +53,12 @@
           <div class="col-md-4">
               <fieldset class="form-group">
                 <label for="departamento">DPI Extensionista</label>
-                <input maxlength="13" type="text" class="form-control" id="dpi_extensionista" name="dpi_extensionista" required>                 
+                <input  onkeypress="return isNumberKey(event)" maxlength="13" type="text" class="form-control" id="dpi_extensionista" name="dpi_extensionista" required>                 
               </fieldset>
           </div>
           <div class="col-md-4">
               <fieldset class="form-group">
-                <label for="departamento">Teléfono Extensionista</label>
+                <label onkeypress="return isNumberKey(event)" for="departamento">Teléfono Extensionista</label>
                 <input maxlength="8" type="text" class="form-control" id="telefono_extensionista" name="telefono_extensionista" required>
               </fieldset>
           </div>
@@ -75,14 +75,14 @@
           <div class="col-md-6">
               <fieldset class="form-group">
                 <label for="departamento">DPI Jefe Departamental</label>
-                <input maxlength="13" type="text" class="form-control" id="dpi_nombre_jefe" name="dpi_nombre_jefe" required>                 
+                <input onkeypress="return isNumberKey(event)" maxlength="13" type="text" class="form-control" id="dpi_nombre_jefe" name="dpi_nombre_jefe" required>                 
               </fieldset>
           </div>
         
           <div class="col-md-6">
               <fieldset class="form-group">
                 <label for="departamento">Teléfono Jefe Departamental</label>
-                <input maxlength="8" type="text" class="form-control" id="telefono_nombre_jefe" name="telefono_nombre_jefe" required>                 
+                <input onkeypress="return isNumberKey(event)" maxlength="8" type="text" class="form-control" id="telefono_nombre_jefe" name="telefono_nombre_jefe" required>                 
               </fieldset>
           </div>
         </div>
@@ -103,3 +103,15 @@
 
   </div>
 </div>
+
+
+<script type="text/javascript">
+  function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+ 
+         return true;
+      }
+</script>

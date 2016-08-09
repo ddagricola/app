@@ -4,13 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
-
+use DB;
 class Colaborador extends Model
 {
     protected $table = "colaborador";
     public $timestamps = false;
     protected $fillable = [
         "id_usuario",
+        "id_jefatura",
 		"id_tipo_colaborador",
 		"nombre",
 		"primer_nombre",
@@ -26,7 +27,8 @@ class Colaborador extends Model
 		"fecha_modificacion",
 		"email_modificacion",
 		"ip_modificacion",
-		"contrato"
+		"contrato",
+        "cui"
     ];
     public function scopeNombreAuth($query){
     	$nombre = "";
@@ -39,5 +41,10 @@ class Colaborador extends Model
     	}
     	return $nombre;
 
+    }
+
+    public static function colaboradorJefatura(){
+        return DB::select(DB::raw("select jefatura.nombre as jefatura,colaborador.* from colaborador 
+        join jefatura on jefatura.id = colaborador.id_jefatura"));
     }
 }
