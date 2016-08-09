@@ -13,6 +13,7 @@ class Colaborador extends Model
         "id_usuario",
         "id_jefatura",
 		"id_tipo_colaborador",
+        "id_puesto",
 		"nombre",
 		"primer_nombre",
 		"segundo_nombre",
@@ -44,7 +45,8 @@ class Colaborador extends Model
     }
 
     public static function colaboradorJefatura(){
-        return DB::select(DB::raw("select jefatura.nombre as jefatura,colaborador.* from colaborador 
-        join jefatura on jefatura.id = colaborador.id_jefatura"));
+        return DB::select(DB::raw("select puesto.nombre as puesto,jefatura.nombre as jefatura,colaborador.* from colaborador 
+        join jefatura on jefatura.id = colaborador.id_jefatura
+        join puesto on puesto.id = colaborador.id_puesto"));
     }
 }
