@@ -157,8 +157,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         #Barryvdh\DomPDF\ServiceProvider::class,
         #Milon\Barcode\BarcodeServiceProvider::class,
-        #Collective\Bus\BusServiceProvider::class,
-        #Maatwebsite\Excel\ExcelServiceProvider::class,
+        Collective\Bus\BusServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
