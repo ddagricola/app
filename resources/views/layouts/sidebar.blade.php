@@ -74,7 +74,12 @@
                         </a>
                     </li>
                 @else
-                
+                <li>
+                    <a href="{{ url('recepcion/colaboradores/listado') }}">
+                        <i class="fa fa-users"></i>
+                        <span>Empleados</span>
+                    </a>
+                </li> 
                     <li>
                         <a href="{{ url('mantenimiento/puestos') }}">
                             <i class="fa fa-users"></i>

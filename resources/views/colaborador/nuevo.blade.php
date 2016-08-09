@@ -17,40 +17,40 @@
                     </h3>
                 </div>
                 <div class="box-body">
-                    <form class="form" method="POST" action="{{ url('recepcion/jefatura/guardar') }}" accept-charset="UTF-8">
+                    <form class="form" method="POST" action="{{ url('recepcion/colaboradores/guardar') }}" accept-charset="UTF-8">
                         {!! csrf_field() !!}
                         <div class="col-md-4">
                             <fieldset class="form-group">
                                 <label for="pais">CUI</label>
-                                <input type="text" class="form-control" id="fecha" name="fecha">
+                                <input type="text" class="form-control" name="cui" maxlength="13">
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="pais">Primer Nombre</label>
-                                <input type="text" class="form-control" id="fecha" name="fecha">
+                                <input type="text" class="form-control" name="primer_nombre">
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="pais">Segundo Nombre</label>
-                                <input type="text" class="form-control" id="fecha" name="fecha">
+                                <input type="text" class="form-control" name="segundo_nombre">
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="pais">Tercer Nombre</label>
-                                <input type="text" class="form-control" id="fecha" name="fecha">
+                                <input type="text" class="form-control" name="tercer_nombre">
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="pais">Primer Apellido</label>
-                                <input type="text" class="form-control" id="fecha" name="fecha">
+                                <input type="text" class="form-control" name="primer_apellido">
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="pais">Segundo Apellido</label>
-                                <input type="text" class="form-control" id="fecha" name="fecha">
+                                <input type="text" class="form-control" name="segundo_apellido">
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="pais">Apellido Casada (No incluir DE)</label>
-                                <input type="text" class="form-control" id="fecha" name="fecha">
+                                <input type="text" class="form-control" name="apellido_casada">
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="pais">Jefatura </label>
-                                <select id="id_colaborador" name="id_colaborador" class="form-control">
+                                <select id="id_colaborador" name="id_jefatura" class="form-control">
                                     @foreach($jefaturas as $jefatura) 
                                         <option value="{{ $jefatura->id }}">
                                             {{ $jefatura->nombre }}
@@ -60,11 +60,17 @@
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="pais">Contrato </label>
-                                <input type="text" class="form-control" id="pais" name="nombre_visitante" required>
+                                <input type="text" class="form-control" name="contrato" required>
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="pais">Puesto</label>
-                                <input type="text" class="form-control" id="pais" name="lugar_visitante" required>
+                                <select id="id_colaborador" name="id_puesto" class="form-control">
+                                    @foreach($puestos as $jefatura) 
+                                        <option value="{{ $jefatura->id }}">
+                                            {{ $jefatura->nombre }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </fieldset>
                             <fieldset class="form-group">
                                 <button class="btn btn-primary">Guardar</button>

@@ -153,6 +153,7 @@ Route::group(['prefix'=>'recepcion','middleware'=>'auth'], function(){
 	Route::get("colaboradores/nuevo", "ColaboradorController@nuevo");
 	Route::get("colaboradores/listado", "ColaboradorController@listado");
 	Route::get("colaboradores/todo", "ColaboradorController@todo");
+	Route::post("colaboradores/guardar", "ColaboradorController@guardar");
 });
 
 Route::get("planilla", function(){

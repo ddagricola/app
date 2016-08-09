@@ -80,9 +80,9 @@ $(function(){
                 },
                 { "data": "cui", "targets": 1,"width":"5%" },
                 { "data": "primer_nombre", "targets": 2},
-                { "data": "primer_nombre", "targets": 3 },
+                { "data": "primer_apellido", "targets": 3 },
                 //{ "data": "segundo_nombre", "targets": 4 },
-                { "data": "primer_apellido", "targets": 4 },
+                { "data": "puesto", "targets": 4 },
                 //{ "data": "segundo_apellido", "targets": 6 },
                 { "data": "jefatura", "targets": 5 },
                 {
