@@ -41,7 +41,7 @@ class PuestoController extends Controller
     {
         //var_dump($request->all());die;
         $puesto = new Puesto;
-        $puesto->nombre = strtoupper($request->nombre);
+        $puesto->nombre = $this->str_utf(strtoupper($request->nombre));
         $puesto->estado = 1;
         $puesto->fecha_creacion = Carbon::now();
         $puesto->email_creacion = (isset(Auth::user()->email)) ?Auth::user()->email : 'guest';
@@ -101,5 +101,12 @@ class PuestoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function str_utf($string){
+        $vowels = array("á", "é", "í", "ó", "ú");
+        $replace = array('Á', 'É', 'Í', 'Ó', 'Ú'); 
+
+        return  str_replace($vowels, $replace, $string);
     }
 }
