@@ -6,7 +6,7 @@ Homestead.yaml
 Homestead.json
 .env
 /public/bower_components
-
+/dataquery
 # Laravel 4 specific
 bootstrap/compiled.php
 app/storage/

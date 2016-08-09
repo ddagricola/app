@@ -97,7 +97,7 @@ class MovimientoController extends Controller
     }
     public function movimientoMunicipal($idMunicipio, $idDetalleIntervencion){
         $municipio = Municipio::find($idMunicipio);
-        $comunidades = Comunidad::whereIdMunicipio($idMunicipio)->with("municipios")->get();
+        $comunidades = Comunidad::divisionTipoDivision($idMunicipio);//whereIdMunicipio($idMunicipio)->with("municipios")->get();
         return view('movimiento.listado-comunidad',["municipio"=>$municipio, "comunidades"=>$comunidades,"id_detalle_intervencion"=>$idDetalleIntervencion]);
     }
     public function nuevoEventoComunidad(Request $request){
@@ -134,10 +134,10 @@ class MovimientoController extends Controller
             $movimiento = new Movimiento;
             $movimiento->id_comunidad = $request->id_comunidad;
             $movimiento->id_detalle_intervencion = $request->id_detalle_intervencion;
-            $movimiento->nombre_extensionista = $request->nombre_extensionista;
+            $movimiento->nombre_extensionista = strtoupper($request->nombre_extensionista);
             $movimiento->cui_extensionista = $request->dpi_extensionista;
             $movimiento->telefono_extensionista = $request->telefono_extensionista;
-            $movimiento->nombre_jefe = $request->nombre_jefe;
+            $movimiento->nombre_jefe = strtoupper($request->nombre_jefe);
             $movimiento->cui_jefe = $request->dpi_jefe_departamental;
             $movimiento->telefono_jefe = $request->telefono_nombre_jefe;
             $movimiento->observacion = null;

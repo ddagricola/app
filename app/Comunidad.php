@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Comunidad extends Model
 {
@@ -28,5 +29,17 @@ class Comunidad extends Model
     public function municipios(){
         return $this->belongsTo('App\Municipio', 'id_municipio');
         //return $this->hasMany('App\Municipio', 'id_municipio');
+    }
+    public static function divisionTipoDivision($id){ //id de municipio
+        return DB::select(DB::raw("
+                select 
+                tipo_division.nombre as division,
+                comunidad.nombre as comunidad,
+                comunidad.id as id
+                 from comunidad 
+                    join tipo_division on tipo_division.id = comunidad.id_tipo_division
+                        where comunidad.id_municipio = $id;
+            "));
+
     }
 }

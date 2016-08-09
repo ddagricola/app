@@ -60,7 +60,27 @@
                             <span>Distribuciones</span>
                         </a>
                     </li>
+                @elseif(Auth::user()->id_rol == 4)
+                    <li>
+                        <a href="{{ url('/') }}">
+                            <i class="fa fa-home"></i>
+                            <span>Recepción</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('recepcion/colaboradores/listado') }}">
+                            <i class="fa fa-users"></i>
+                            <span>Empleados</span>
+                        </a>
+                    </li>
                 @else
+                
+                    <li>
+                        <a href="{{ url('mantenimiento/puestos') }}">
+                            <i class="fa fa-users"></i>
+                            <span>Puestos</span>
+                        </a>
+                    </li>
                 <li>
                     <a href="{{ url('configuration/usuario') }}">
                         <i class="fa fa-folder-o"></i>

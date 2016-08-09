@@ -113,9 +113,7 @@ class DetalleIntervencion extends Model
 				concat(municipio.codigo,' - ',municipio.nombre) as municipio,
 				detalle_intervencion.nbeneficiario as beneficiarios,
 				detalle_intervencion.cantidad_beneficiario,
-				case unidad_medida.id
-					when 1 then concat(detalle_intervencion.cantidad_beneficiario, ' Lbs')
-				end  as cantidad_por_beneficiario,
+				concat(detalle_intervencion.cantidad_beneficiario, ' ', medida_entrega.nombre) as cantidad_por_beneficiario,
 				detalle_intervencion.cantidad,
 				unidad_medida.nombre as unidad_medida,
 				case unidad_medida.id 
@@ -130,6 +128,7 @@ class DetalleIntervencion extends Model
 					join municipio on municipio.id = detalle_intervencion.id_municipio
 				    join departamento on departamento.id = municipio.id_departamento
 				    join unidad_medida on unidad_medida.id = detalle_intervencion.id_unidad_medida
+				    join unidad_medida medida_entrega on medida_entrega.id = detalle_intervencion.id_unidad_entrega
 				    join partida on partida.id = detalle_intervencion.id_partida_presupuestaria
 				    where detalle_intervencion.estado = 1
 				    and detalle_intervencion.id_municipio = $idMunicipio;
