@@ -52,7 +52,7 @@
 <script type="text/javascript">
 function remove(data){
     $.ajax({
-        url: "<?php echo url('direcciones/remove') ?>"+"/"+data,
+        url: "<?php echo url('recepcion/colaboradores/remove') ?>"+"/"+data,
         type : 'GET',
         error: function(){
             alert('Ha ocurrido un error en el servidor')
@@ -63,7 +63,7 @@ function remove(data){
     });
 }
 function editar(edit){
-    location.href = "{{ url('mantenimiento/direcciones/') }}"+"/"+edit+"/edit";
+    location.href = "{{ url('recepcion/colaboradores/editar') }}"+"/"+edit;
 }
 $(function(){
     $add = $("#add");
@@ -82,7 +82,7 @@ $(function(){
                 { "data": "primer_nombre", "targets": 2},
                 { "data": "primer_apellido", "targets": 3 },
                 //{ "data": "segundo_nombre", "targets": 4 },
-                { "data": "puesto", "targets": 4 },
+                { "data": "puesto", "targets": 4 , "width":"20%"},
                 //{ "data": "segundo_apellido", "targets": 6 },
                 { "data": "jefatura", "targets": 5 },
                 {

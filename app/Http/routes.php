@@ -151,10 +151,14 @@ Route::group(['prefix'=>'recepcion','middleware'=>'auth'], function(){
 	Route::get('jefatura/listado/{id}', 'ColaboradorVisitaController@indexVisita');
 
 	Route::get("colaboradores/nuevo", "ColaboradorController@nuevo");
+	Route::get("colaboradores/editar/{id}", "ColaboradorController@editar");
 	Route::get("colaboradores/listado", "ColaboradorController@listado");
 	Route::get("colaboradores/todo", "ColaboradorController@todo");
+
 	Route::post("colaboradores/guardar", "ColaboradorController@guardar");
+	Route::post("colaboradores/update/{id}", "ColaboradorController@update");
 });
+Route::get("recepcion/colaboradores/remove/{id}", "ColaboradorController@delete");
 
 Route::get("planilla", function(){
 	$data = \App\MovimientoBeneficiario::beneficiariosIngresoEvento(1);

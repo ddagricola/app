@@ -37,6 +37,13 @@ class ColaboradorController extends Controller
         return view("colaborador.nuevo",["jefaturas"=>$jefaturas, "puestos"=>$puestos]);
     }
 
+    public function editar($id){
+        $jefaturas = Jefatura::whereEstado(1)->get();
+        $puestos = Puesto::whereEstado(1)->get();
+        $colaborador = Colaborador::find($id);
+        return view("colaborador.editar",["colaborador"=>$colaborador,"jefaturas"=>$jefaturas, "puestos"=>$puestos]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -134,7 +141,27 @@ class ColaboradorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $colaborador = Colaborador::find($id);
+        //$colaborador->id_usuario = null;
+        $colaborador->id_jefatura = $request->id_jefatura;
+        $colaborador->id_tipo_colaborador = 1;
+        $colaborador->id_puesto = $request->id_puesto;
+        $colaborador->nombre = 1;
+        $colaborador->primer_nombre = $this->str_utf(strtoupper($request->primer_nombre));
+        $colaborador->segundo_nombre = $this->str_utf(strtoupper($request->segundo_nombre));
+        $colaborador->tercer_nombre = $this->str_utf(strtoupper($request->tercer_nombre));
+        $colaborador->primer_apellido = $this->str_utf(strtoupper($request->primer_apellido));
+        $colaborador->segundo_apellido = $this->str_utf(strtoupper($request->segundo_apellido));
+        $colaborador->apellido_casada = $this->str_utf(strtoupper($request->apellido_casada));
+        $colaborador->estado = 1;
+        $colaborador->fecha_modificacion = Carbon::now();
+        $colaborador->email_modificacion = Auth::user()->email;
+        $colaborador->ip_modificacion = $request->ip();
+        $colaborador->contrato = $request->contrato;
+        $colaborador->cui = $request->cui;
+        $colaborador->save();
+
+        return redirect()->action('ColaboradorController@listado');
     }
 
     /**
@@ -146,6 +173,19 @@ class ColaboradorController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function delete(Request $request, $id)
+    {
+     
+        $colaborador = Colaborador::find($id);
+        $colaborador->estado = 0;
+        $colaborador->fecha_modificacion = Carbon::now();
+        $colaborador->email_modificacion = Auth::user()->email;
+        $colaborador->ip_modificacion = $request->ip();
+        $colaborador->save();
+
+        return redirect()->action('ColaboradorController@listado');   
     }
 
     public function configCuenta(){
