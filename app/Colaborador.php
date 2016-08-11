@@ -47,6 +47,6 @@ class Colaborador extends Model
     public static function colaboradorJefatura(){
         return DB::select(DB::raw("select puesto.nombre as puesto,jefatura.nombre as jefatura,colaborador.* from colaborador 
         join jefatura on jefatura.id = colaborador.id_jefatura
-        join puesto on puesto.id = colaborador.id_puesto"));
+        join puesto on puesto.id = colaborador.id_puesto where colaborador.estado not in(0)"));
     }
 }

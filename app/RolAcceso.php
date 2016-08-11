@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Auth;
 class RolAcceso extends Model
 {
     protected $table = 'rol_acceso';
@@ -32,6 +32,6 @@ class RolAcceso extends Model
         return $this->belongsTo('App\User','id');
     }
     public function scopeRolAcceso(){
-        return $this->where('id_usuario','=',2)->get();
+        return $this->where('id_usuario','=',Auth::user()->id)->get();
     }
 }
