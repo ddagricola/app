@@ -77,7 +77,7 @@ $(function(){
                     "targets": 4,
                     "data": "id",
                     "render": function ( data, type, full, meta ) {
-                        edit = "<a href='javascript:ingreso("+data+")' id='edit' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Ingresar Beneficiarios'><span class='glyphicon glyphicon-user' aria-hidden='true'></span></a>";
+                        edit = "<a href='javascript:ingreso("+data+")' id='edit' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Asignar Colaborador'><span class='glyphicon glyphicon-user' aria-hidden='true'></span></a>";
                         return "<div class='pull-right'>" + edit +"</div>";
                     }
                 },

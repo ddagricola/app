@@ -76,19 +76,19 @@
                 @else
                 <li>
                     <a href="{{ url('recepcion/colaboradores/listado') }}">
-                        <i class="fa fa-users"></i>
+                        <i class="fa  fa-male"></i>
                         <span>Empleados</span>
                     </a>
                 </li> 
                     <li>
                         <a href="{{ url('mantenimiento/puestos') }}">
-                            <i class="fa fa-users"></i>
+                            <i class="fa fa-newspaper-o"></i>
                             <span>Puestos</span>
                         </a>
                     </li>
                 <li>
                     <a href="{{ url('configuration/usuario') }}">
-                        <i class="fa fa-folder-o"></i>
+                        <i class="fa fa-users"></i>
                         <span>Usuarios</span>
                     </a>
                 </li>

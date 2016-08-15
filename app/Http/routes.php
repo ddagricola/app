@@ -116,6 +116,8 @@ Route::group(['prefix'=>'mantenimiento','middleware'=>'auth'], function(){
 });
 Route::resource('beneficiarios','BeneficiarioController');
 Route::get('usuario/todo','UsuarioController@todo');
+Route::get('puestos/remove/{id}','PuestoController@delete');
+
 Route::group(['prefix'=>'configuration','middleware'=>'auth'], function(){
 	Route::resource('usuario','UsuarioController');
 	
