@@ -223,14 +223,14 @@
                     <strong>Goal Completion</strong>
                   </p>-->
 
-                  <div class="progress-group">
+                  <!--<div class="progress-group">
                     <span class="progress-text">Beneficiarios Ingresados</span>
                     <span class="progress-number"><b>0</b>/{{$movimiento->nbeneficiario}}</span>
 
                     <div class="progress sm">
                       <div class="progress-bar progress-bar-aqua" style="width: 20%"></div>
                     </div>
-                  </div>
+                  </div>-->
                 </div>
                 <!-- /.col -->
               </div>
@@ -244,33 +244,27 @@
             </div>
             <!-- ./box-body -->
             <div class="box-footer">
-              <div class="row">
+              <!--<div class="row">
                 <div class="col-sm-3 col-xs-6">
                   <div class="description-block border-right">
-                    <!--<span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>-->
                     <h5 class="description-header">
                       {{$detalle->cantidad_por_beneficiario}} DE {{$detalle->insumo}}
                       </h5>
                     <span class="description-text">POR BENEFICIARIO</span>
                   </div>
-                  <!-- /.description-block -->
                 </div>
-                <!-- /.col -->
                 <div class="col-sm-3 col-xs-6">
                   <div class="description-block border-right">
                     <h5 class="description-header">{{$detalle->cantidad}} QUINTALES</h5>
                     <span class="description-text">ADQUIRIDOS PARA {{$detalle->municipio}} </span>
                   </div>
                 </div>
-                <!-- /.col -->
                 <div class="col-sm-3 col-xs-6">
                   <div class="description-block border-right">
-                    <!--<span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>-->
                     <h5 class="description-header">{{$detalle->beneficiarios}} BENEFICIARIOS</h5>
                     <span class="description-text">AUTORIZADOS EN {{$detalle->municipio}}</span>
                   </div>
-                  <!-- /.description-block -->
-                </div>
+                </div>-->
                 <!-- /.col -->
                 <!--<div class="col-sm-3 col-xs-6">
                   <div class="description-block">

@@ -77,7 +77,8 @@ class PuestoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $puesto = Puesto::find($id);
+        return view("puesto.editar",["puesto"=>$puesto]);
     }
 
     /**
@@ -89,7 +90,13 @@ class PuestoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $puesto = Puesto::find($id);
+        $puesto->nombre = $this->str_utf(strtoupper($request->nombre));
+        $puesto->fecha_modificacion = Carbon::now();
+        $puesto->email_modificacion = (isset(Auth::user()->email)) ?Auth::user()->email : 'guest';
+        $puesto->ip_modificacion = $request->ip();
+        $puesto->save();
+        return redirect()->action('PuestoController@index');
     }
 
     /**
@@ -102,7 +109,15 @@ class PuestoController extends Controller
     {
         //
     }
-
+    public function delete(Request $request, $id){
+        $puesto = Puesto::find($id);
+        $puesto->estado = 0;
+        $puesto->fecha_modificacion = Carbon::now();
+        $puesto->email_modificacion = (isset(Auth::user()->email)) ?Auth::user()->email : 'guest';
+        $puesto->ip_modificacion = $request->ip();
+        $puesto->save();
+        return redirect()->action('PuestoController@index');
+    }
     public function str_utf($string){
         $vowels = array("á", "é", "í", "ó", "ú");
         $replace = array('Á', 'É', 'Í', 'Ó', 'Ú'); 

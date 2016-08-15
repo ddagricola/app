@@ -14,14 +14,14 @@
             <div class="box">
                 <div class="box-header">
                 
-                    <h3>Eventos en {{ $municipio->nombre }}</h3>
+                    <h3>COMUNIDADES EN {{ $municipio->nombre }}</h3>
                     <div class="btn-group" role="group" aria-label="...">
                         <a href="javascript:history.back()" ="" class="btn btn-primary">
                             <span class='glyphicon glyphicon-menu-left' aria-hidden='true'></span>
                         </a>
                     </div>
                     <!-- Trigger the modal with a button -->
-                    <button type="button" class="btn" data-toggle="modal" data-target="#myModal">Agregar Evento</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Agregar Comunidad</button>
                     <br>
                     @if(Session::has('message'))
                         <br>
@@ -41,7 +41,7 @@
                                 <th>Municipio</th>
                                 <th>Comunidad</th>
                                 <th>Extensionista</th>
-                                <th>Jefe Departamental</th>
+                                <!--<th>Jefe Departamental</th>-->
                                 <th>Beneficiarios Solicitados</th>
                                 <th></th>
                             </tr>
@@ -91,12 +91,12 @@ $(function(){
                 //{ "data": "nbeneficiario", "targets": 4},
                 //{ "data": "nbeneficiario", "targets": 4},
                 { "data": "nombre_extensionista", "targets": 4},
-                { "data": "nombre_jefe", "targets": 5},
-                { "data": "nbeneficiario", "targets": 6},
+                //{ "data": "nombre_jefe", "targets": 5},
+                { "data": "nbeneficiario", "targets": 5},
                 
                 //{ "data": "cantidad_por_beneficiario", "targets": 5},
                 {
-                    "targets": 7,
+                    "targets": 6,
                     "data": "id_movimiento",
                     "render": function ( data, type, full, meta ) {
                         edit = "<a href='javascript:ingreso("+data+")' id='edit' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Ingresar Beneficiarios'><span class='glyphicon glyphicon-user' aria-hidden='true'></span></a>";

@@ -48,7 +48,7 @@
 <script type="text/javascript">
 function remove(data){
     $.ajax({
-        url: "<?php echo url('ministerios/remove') ?>"+"/"+data,
+        url: "<?php echo url('puestos/remove/') ?>"+"/"+data,
         type : 'GET',
         error: function(){
             alert('Ha ocurrido un error en el servidor')
@@ -59,7 +59,7 @@ function remove(data){
     });
 }
 function editar(edit){
-    location.href = "{{ url('mantenimiento/ministerios/') }}"+"/"+edit+"/edit";
+    location.href = "{{ url('mantenimiento/puestos/') }}"+"/"+edit+"/edit";
 }
 $(function(){
     $add = $("#add");

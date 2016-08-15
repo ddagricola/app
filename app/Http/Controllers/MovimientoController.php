@@ -137,9 +137,9 @@ class MovimientoController extends Controller
             $movimiento->nombre_extensionista = strtoupper($request->nombre_extensionista);
             $movimiento->cui_extensionista = $request->dpi_extensionista;
             $movimiento->telefono_extensionista = $request->telefono_extensionista;
-            $movimiento->nombre_jefe = strtoupper($request->nombre_jefe);
-            $movimiento->cui_jefe = $request->dpi_jefe_departamental;
-            $movimiento->telefono_jefe = $request->telefono_nombre_jefe;
+            $movimiento->nombre_jefe = null;//strtoupper($request->nombre_jefe);
+            $movimiento->cui_jefe = null;//$request->dpi_jefe_departamental;
+            $movimiento->telefono_jefe = null; //$request->telefono_nombre_jefe;
             $movimiento->observacion = null;
             $movimiento->fecha_entrega = Carbon::parse($this->strdate_slash($request->fecha_evento))->format('Y-m-d');
             $movimiento->estado = 1;
