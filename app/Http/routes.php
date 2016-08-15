@@ -159,6 +159,7 @@ Route::group(['prefix'=>'recepcion','middleware'=>'auth'], function(){
 
 	Route::post("colaboradores/guardar", "ColaboradorController@guardar");
 	Route::post("colaboradores/update/{id}", "ColaboradorController@update");
+	Route::get("colaboradores/exportar", "ColaboradorController@export");
 });
 Route::get("recepcion/colaboradores/remove/{id}", "ColaboradorController@delete");
 

@@ -14,7 +14,10 @@
                 <div class="box-header">
                     <div class="row">
                         <div class="col-md-3 pull-left">
-                            <button class="btn btn-default btn-sm" type="button" id="add">Agregar empleado</button>
+                            <button class="btn btn-primary btn-sm" type="button" id="add">Agregar empleado</button>
+                            <a href="{{ url('recepcion/colaboradores/exportar') }}" class="btn btn-success btn-sm" type="button" id="add">
+                                Exportar EXCEL
+                            </a>
                         </div>
                     </div>
                 </div>

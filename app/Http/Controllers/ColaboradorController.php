@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Excel;
 use App\Http\Requests;
 use App\Colaborador;
 use Auth;
@@ -203,5 +203,15 @@ class ColaboradorController extends Controller
         $replace = array('Á', 'É', 'Í', 'Ó', 'Ú'); 
 
         return  str_replace($vowels, $replace, $string);
+    }
+
+    public function export(){
+        Excel::create('listado-empleados', function($excel) {
+            $excel->sheet('First sheet', function($sheet) {
+                $data = Colaborador::colaboradorJefatura();
+                $sheet->loadView('colaborador.export',["data"=>$data]);
+            });
+
+        })->download('xls');
     }
 }
