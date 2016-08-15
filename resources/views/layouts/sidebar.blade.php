@@ -8,7 +8,7 @@
             <div class="pull-left info">
                 <p>{{ \App\Colaborador::nombreAuth() }}</p>
                 <!-- Status -->
-                <a href="#"><i class="fa fa-circle text-success"></i> 
+                <a href="#" style="font-size:9px"><i class="fa fa-circle text-success"></i> 
                     {{ \App\Jefatura::find(Auth::user()->id_jefatura)->nombre }}
                 </a>
             </div>
@@ -65,12 +65,6 @@
                         <a href="{{ url('/') }}">
                             <i class="fa fa-home"></i>
                             <span>Recepción</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('recepcion/colaboradores/listado') }}">
-                            <i class="fa fa-users"></i>
-                            <span>Empleados</span>
                         </a>
                     </li>
                 @else
