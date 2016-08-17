@@ -67,6 +67,13 @@
                             <span>Recepción</span>
                         </a>
                     </li>
+                @elseif(Auth::user()->id_rol == 5)
+                    <li>
+                        <a href="{{ url('recepcion/colaboradores/listado') }}">
+                            <i class="fa  fa-male"></i>
+                            <span>Empleados</span>
+                        </a>
+                    </li> 
                 @else
                 <li>
                     <a href="{{ url('recepcion/colaboradores/listado') }}">
