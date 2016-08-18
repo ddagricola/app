@@ -17,7 +17,7 @@
                             </div>
                             <div class="box-body">
                             <?php  $jefaturas = \App\RolAcceso::RolAcceso(); ?>
-                            <?php var_dump($jefaturas); ?>
+                            
                                 <div class="row">
                                 <?php foreach($jefaturas as $item): ?>
                                     <?php 
