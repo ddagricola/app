@@ -44,6 +44,7 @@
         <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
     </head>
     <body class="skin-blue-light">
+    
         <div class="wrapper">
             @include('layouts.header')
             @include('layouts.sidebar')
