@@ -44,7 +44,7 @@
 	}
 	.img-barcode{
 		width: 50%;
-		border:1px solid blue;
+		/*border:1px solid blue;*/
 		text-align: center;
 		padding:0px;
 	}

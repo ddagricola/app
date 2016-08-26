@@ -93,7 +93,7 @@
 		<table width="100%" class="table-from-picture">
 			<tr>
 				<td colspan="3">
-					<img src="{{public_path().'/img/logo-cuencas.png'}}" style="width:500px;">
+					<img src="{{public_path().'/img/logo-boletas.png'}}" style="width:500px;">
 				</td>
 				<td rowspan="2" class="box-legend" width="35%" height="10px">
 					<p style="text-align:justify">

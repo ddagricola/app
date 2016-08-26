@@ -229,7 +229,7 @@ echo DNS1D::getBarcodePNGPath("4445645656", "PHARMA2T",3,33);
 
 
 	foreach ($data as $value) {
-		$value->{'barcode'} = DNS1D::getBarcodePNG("999999999999", "C39+",1,30);
+		$value->{'barcode'} = 1;//;DNS1D::getBarcodePNG("999999999999", "C39+",1,30);
 		//$value['codebar'] = [];
 		if($registerCount == 3){
 			array_push($pages, $pagesItem);
