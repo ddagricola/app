@@ -105,16 +105,21 @@ class DistribucionController extends Controller
                 'event' => 'required',
             ]);
 
+            $primerNombre = $this->str_replace_utf(strtoupper($request->primer_nombre));
+            $segundoNombre = (trim($request->segundo_nombre) != '') ? $this->str_replace_utf(strtoupper($request->segundo_nombre)) : null;
+            $tercerNombre = (trim($request->tercer_nombre) != '') ? $this->str_replace_utf(strtoupper($request->tercer_nombre)) : null ;
+            $primerApellido = $this->str_replace_utf(strtoupper($request->primer_apellido));
+            $segundoApellido = (trim($request->segundo_apellido) != '') ? $this->str_replace_utf(strtoupper($request->segundo_apellido)) : null ;
+            $apellidoCasada = (trim($request->apellido_casada) != '') ? $this->str_replace_utf(strtoupper($request->apellido_casada)) : null ;
 
             $beneficiario = BeneficiarioOrigen::find($request->id);
             $beneficiario->id_municipio = $request->municipio_nacimiento;
-            //$beneficiario->cui = $request->cui;
-            $beneficiario->primer_nombre = strtoupper($request->primer_nombre);
-            $beneficiario->segundo_nombre = (trim($request->segundo_nombre) != '') ? strtoupper($request->segundo_nombre) : null ;
-            $beneficiario->tercer_nombre = (trim($request->tercer_nombre) != '') ? strtoupper($request->tercer_nombre) : null ;
-            $beneficiario->primer_apellido = strtoupper($request->primer_apellido);
-            $beneficiario->segundo_apellido = (trim($request->segundo_apellido) != '') ? strtoupper($request->segundo_apellido) : null ;
-            $beneficiario->apellido_casada = (trim($request->apellido_casada) != '') ? strtoupper($request->apellido_casada) : null ;
+            $beneficiario->primer_nombre = $primerNombre;
+            $beneficiario->segundo_nombre = $segundoNombre;
+            $beneficiario->tercer_nombre = $tercerNombre;
+            $beneficiario->primer_apellido = $primerApellido;
+            $beneficiario->segundo_apellido = $segundoApellido;
+            $beneficiario->apellido_casada = $apellidoCasada;
             $beneficiario->fecha_nacimiento = Carbon::parse($this->strdate_slash($request->fecha_nacimiento))->format('Y-m-d');
             $beneficiario->nacionalidad = $request->nacionalidad;
             $beneficiario->estado_civil = $request->estado_civil;
@@ -138,15 +143,23 @@ class DistribucionController extends Controller
             ]);
 
 
+            $primerNombre = $this->str_replace_utf(strtoupper($request->primer_nombre));
+            $segundoNombre = (trim($request->segundo_nombre) != '') ? $this->str_replace_utf(strtoupper($request->segundo_nombre)) : null;
+            $tercerNombre = (trim($request->tercer_nombre) != '') ? $this->str_replace_utf(strtoupper($request->tercer_nombre)) : null ;
+            $primerApellido = $this->str_replace_utf(strtoupper($request->primer_apellido));
+            $segundoApellido = (trim($request->segundo_apellido) != '') ? $this->str_replace_utf(strtoupper($request->segundo_apellido)) : null ;
+            $apellidoCasada = (trim($request->apellido_casada) != '') ? $this->str_replace_utf(strtoupper($request->apellido_casada)) : null ;
+
+
             $beneficiario = new BeneficiarioOrigen;
             $beneficiario->id_municipio = $request->municipio_nacimiento;
             $beneficiario->cui = $request->cui;
-            $beneficiario->primer_nombre = strtoupper($request->primer_nombre);
-            $beneficiario->segundo_nombre = (trim($request->segundo_nombre) != '') ? strtoupper($request->segundo_nombre) : null ;
-            $beneficiario->tercer_nombre = (trim($request->tercer_nombre) != '') ? strtoupper($request->tercer_nombre) : null ;
-            $beneficiario->primer_apellido = strtoupper($request->primer_apellido);
-            $beneficiario->segundo_apellido = (trim($request->segundo_apellido) != '') ? strtoupper($request->segundo_apellido) : null ;
-            $beneficiario->apellido_casada = (trim($request->apellido_casada) != '') ? strtoupper($request->apellido_casada) : null ;
+            $beneficiario->primer_nombre = $primerNombre;
+            $beneficiario->segundo_nombre = $segundoNombre;
+            $beneficiario->tercer_nombre = $tercerNombre;
+            $beneficiario->primer_apellido = $primerApellido;
+            $beneficiario->segundo_apellido = $segundoApellido;
+            $beneficiario->apellido_casada = $apellidoCasada;
             //$beneficiario->edad = $request->estado_civil;
             $beneficiario->fecha_nacimiento = Carbon::parse($this->strdate_slash($request->fecha_nacimiento))->format('Y-m-d');
             $beneficiario->nacionalidad = $request->nacionalidad;
@@ -193,6 +206,12 @@ class DistribucionController extends Controller
     private function strdate_slash($input){
        $search  = array('/');
        $replace = array('-');
+       return str_replace($search, $replace, $input);
+    }
+
+    private function str_replace_utf($input){
+        $search  = array('á','é','í','ó','ú');
+        $replace = array('Á','É','Í','Ó','Ú');
        return str_replace($search, $replace, $input);
     }
 }
