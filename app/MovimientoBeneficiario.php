@@ -35,6 +35,7 @@ class MovimientoBeneficiario extends Model
     public static function beneficiariosIngresoEvento($id){
         return DB::select(DB::raw("
                 select 
+                unidad_entrega.nombre as unidad_entrega,
                 insumo.nombre as insumo,
                 tipo_insumo.nombre as tipo_insumo,
                 municipio_beneficiario.nombre as municipio_beneficiario,
@@ -58,7 +59,7 @@ class MovimientoBeneficiario extends Model
                 beneficiario.primer_apellido,
                 beneficiario.segundo_apellido,
                 beneficiario.apellido_casada,
-                date_format(beneficiario.fecha_nacimiento,'d-%m-%Y%') as fecha_nacimiento_beneficiario,
+                date_format(beneficiario.fecha_nacimiento,'%d-%m-%Y') as fecha_nacimiento_beneficiario,
                 detalle_intervencion.cantidad_beneficiario,
                 insumo.nombre as insumo
                  from movimiento_beneficiario
@@ -75,7 +76,8 @@ class MovimientoBeneficiario extends Model
                     join municipio municipio_beneficiario on municipio_beneficiario.id = beneficiario.id_municipio
                     join departamento departamento_beneficiario on departamento_beneficiario.id = municipio_beneficiario.id_departamento
                     join tipo_insumo on tipo_insumo.id = insumo.id_tipo_insumo
-                    where movimiento.id = 1 and movimiento_beneficiario.estado = 1;
+                    join unidad_medida unidad_entrega on unidad_entrega.id = detalle_intervencion.id_unidad_entrega
+                    where movimiento.id = $id and movimiento_beneficiario.estado = 1;
             "));
     }
 }

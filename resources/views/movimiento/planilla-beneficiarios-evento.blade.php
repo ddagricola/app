@@ -97,15 +97,24 @@
 				</td>
 				<td rowspan="2" class="box-legend" width="35%" height="10px">
 					<p style="text-align:justify">
-						<label style="width:100%;font-weight:bold;font-size:12px">CONVENIO DE COOPERACION TECNICA No. 33-2014</label>
-						<b>Proyecto:</b>Fortalecimiento de la Capacidad de Producción de semillas mejoradas del Instituto de Ciencia y Tecnología Agrícolas -ICTA- para atender a los danmificados de la canicula prolongada del año <?php date("Y")?>
+					Adquisión de semilla certificada de ajonjolí variedad ICTA R-198, modalidad de compra directa, correspondiente al concurso NOG 5194016
+						<!--<label style="width:100%;font-weight:bold;font-size:12px">CONVENIO DE COOPERACION TECNICA No. 33-2014</label>
+						<b>Proyecto:</b>Fortalecimiento de la Capacidad de Producción de semillas mejoradas del Instituto de Ciencia y Tecnología Agrícolas -ICTA- para atender a los danmificados de la canicula prolongada del año <?php date("Y")?>-->
 					</p>
 				</td>
 			</tr>
 			<tr>
 				<td width="1%">INSUMO ENTREGADO:</td>
 				<td class="border-bottom" colspan="2" height="10px">
-					<label>SEMILLA CERTIFICADA DE MAÍZ ICTA HB-83</label>
+					<?php $insumo = $movimiento->tipo.' '.$movimiento->insumo?>
+					<?php 
+						if(strlen($insumo) > 48){
+							echo "<label style='font-size:16px'>$insumo</label>";
+						}else{
+							echo "<label>$insumo</label>";
+						}
+					?>
+					
 				</td>
 			</tr>
 		</table>
@@ -113,13 +122,13 @@
 		<table width="100%" class="header-table">
 		  <tr class="first-row">
 		    <td width="13%"><b>(1) DEPARTAMENTO:</b></td>
-		    <td width="18%">SAN JUAN SACATEPEQUEZ</td>
+		    <td width="18%">{{ $movimiento->departamento }}</td>
 		    <td width="10%"><b>(2) MUNICIPIO:</b></td>
-		    <td width="20%">SANTA LUCIA LA REFORMA</td>
+		    <td width="20%">{{ $movimiento->municipio }}</td>
 		    <td width="11%"><b>(3) COMUNIDAD:</b></td>
-		    <td >SANTO TOMAS DE CASTILLA</td>
+		    <td >{{ $movimiento->comunidad }}</td>
 		    <td width="7%"><b>(4) FECHA:</b></td>
-		    <td >20-05-2014</td>
+		    <td >{{ $movimiento->fecha_entrega }}</td>
 		  </tr>
 		</table>
 		<br>

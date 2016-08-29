@@ -101,7 +101,7 @@
 					</tr>
 					<tr>
 						<td class="item-text"> Fecha de Nacimiento:</td>
-						<td>{{ $item->fecha_nacimiento_beneficiario }}, {{ $item->edad }}</td>
+						<td>{{ $item->fecha_nacimiento_beneficiario }}</td>
 					</tr>
 				</table><br>
 				<table class="body-table">
@@ -118,7 +118,7 @@
 					<tr>
 						<td class="item-text">Fecha de Entrega:</td>
 						<td>
-							24-02-1994
+							{{ $movimiento->fecha_entrega }}
 						</td>
 					</tr>
 					<tr>
@@ -130,7 +130,7 @@
 					<tr>
 						<td class="item-text">Cantidad Entregada:</td>
 						<td>
-							{{ $item->cantidad_beneficiario }} LIBRAS
+							{{ $item->cantidad_beneficiario }} {{$item->unidad_entrega}}
 						</td>
 					</tr>
 				</table>
@@ -161,7 +161,7 @@
 							{{$movimiento->nombre_extensionista}}</td>
 						<td></td>
 						<td>
-							{{$movimiento->nombre_jefe}}
+							{{$jefeDepartamental->nombre}}
 						</td>
 					</tr>
 				</table>

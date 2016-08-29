@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use App\DetalleIntervencion;
 use App\MovimientoBeneficiario;
 use Auth;
+use App\JefeDepartamental;
 class MovimientoController extends Controller
 {
     /**
@@ -177,6 +178,81 @@ class MovimientoController extends Controller
                 return redirect()->action('MovimientoController@movimientoMunicipal',[$request->id_municipio, $request->id_detalle_intervencion]);
         *********/
         
+    }
+    public function exportarPlanillaBeneficiarios($id){
+    $data = MovimientoBeneficiario::beneficiariosIngresoEvento($id);
+    $movimiento = Movimiento::dataMovimiento($id);
+    $movimientoObject = (Object) $movimiento[0];
+    
+    /*$movimiento = Movimiento::find($id);
+    $ubicacionMovimiento = Movimiento::ubicacionMovimiento($id);*/
+    //--- LOGICA PARA HOJAS DE PDF --//
+    $pages = [];
+    $i=0;
+    $pagesItem = [];
+    $registerCount = 0;
+    $pagesCount = 0;
+    
+    foreach ($data as $value) {
+        if($registerCount == 10){
+            array_push($pages, $pagesItem);
+            $pagesItem = [];
+            $registerCount =0;
+        }   
+        array_push($pagesItem, $value);
+        $registerCount++;
+    }
+
+    array_push($pages,$pagesItem);
+    
+    //return view('movimiento.planilla-beneficiarios-evento',['pages'=>$pages]);die;
+    $pdf = \PDF::loadView('movimiento.planilla-beneficiarios-evento',
+        [
+            
+        'movimiento'=>$movimientoObject,
+        'pages'=>$pages,
+        ])->setPaper("A4","landscape");
+      return $pdf->download("planilla".substr(\Crypt::encrypt($id), 0, 9).'.pdf');
+    }
+
+    public function exportarBoletasBeneficiarios($id){
+        $data = \App\MovimientoBeneficiario::beneficiariosIngresoEvento($id);
+        //$movimiento = \App\Movimiento::find($id);
+        $movimiento = Movimiento::dataMovimiento($id);
+        $movimientoObject = (Object) $movimiento[0];
+        $jefeDepartamental = JefeDepartamental::whereIdDepartamento(15)->get();
+        
+        //--- LOGICA PARA HOJAS DE PDF --//
+        $pages = [];
+        $i=0;
+        $pagesItem = [];
+        $registerCount = 0;
+        $pagesCount = 0;
+
+
+        foreach ($data as $value) {
+            $value->{'barcode'} = 1;//;DNS1D::getBarcodePNG("999999999999", "C39+",1,30);
+            //$value['codebar'] = [];
+            if($registerCount == 3){
+                array_push($pages, $pagesItem);
+                $pagesItem = [];
+                $registerCount =0;
+            }   
+            array_push($pagesItem, $value);
+            $registerCount++;
+        }
+        
+        array_push($pages,$pagesItem);
+        
+        //return view('movimiento.boleta-beneficiarios-evento',['pages'=>$pages]);die;
+        $pdf = \PDF::loadView('movimiento.boleta-beneficiarios-evento',
+            [
+                
+            'movimiento'=>$movimientoObject,
+            'jefeDepartamental'=>$jefeDepartamental[0],
+            'pages'=>$pages,
+            ])->setPaper("A4"); //,"landscape"
+        return $pdf->download("boletas".substr(\Crypt::encrypt($id), 0, 9).'.pdf');
     }
     public function eventoBeneficiarios($id){
         $movimiento = Movimiento::find($id);

@@ -72,11 +72,11 @@ function listado(edit){
     location.href = "{{ url('movimiento/beneficiarios/evento/') }}"+"/"+edit;
 }
 function planilla(edit){
-    location.href = "{{ url('planilla') }}";
+    location.href = "{{ url('grupos/tecnicos/exportar/planilla') }}"+"/"+edit;
 }
 
-function boletas(edit){
-    location.href = "{{ url('boleta') }}";
+function boletas(key){
+    location.href = "{{ url('grupos/tecnicos/exportar/boletas/') }}"+"/"+key;
 }
 
 $(function(){

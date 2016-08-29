@@ -140,11 +140,11 @@ Route::group(['prefix'=>'distribuciones','middleware'=>'auth'], function(){
 });
 
 Route::group(['prefix'=>'movimiento','middleware'=>'auth'], function(){
+
 	Route::get('municipal/{id}/{detalle}', 'MovimientoController@movimientoMunicipal');
 	Route::post('comunidad/evento-nuevo','MovimientoController@nuevoEventoComunidad');
 	Route::get('comunidad/todo-eventos/{id}','MovimientoController@todoEventoComunidad');
 	Route::get("beneficiarios/evento/{id}", "MovimientoController@eventoBeneficiarios");
-
 });
 
 Route::group(['prefix'=>'recepcion','middleware'=>'auth'], function(){
@@ -163,10 +163,10 @@ Route::group(['prefix'=>'recepcion','middleware'=>'auth'], function(){
 });
 Route::get("recepcion/colaboradores/remove/{id}", "ColaboradorController@delete");
 
-Route::get("planilla", function(){
+/*Route::get("planilla", function(){
 	$data = \App\MovimientoBeneficiario::beneficiariosIngresoEvento(1);
 	$movimiento = \App\Movimiento::find(1);
-	
+	$ubicacionMovimiento = \App\Movimiento::ubicacionMovimiento(1);
 	//--- LOGICA PARA HOJAS DE PDF --//
 	$pages = [];
 	$i=0;
@@ -186,7 +186,6 @@ Route::get("planilla", function(){
 
 	array_push($pages,$pagesItem);
 	
-	//return view('movimiento.planilla-beneficiarios-evento',['pages'=>$pages]);die;
 	$pdf = \PDF::loadView('movimiento.planilla-beneficiarios-evento',
 		[
 			
@@ -196,7 +195,7 @@ Route::get("planilla", function(){
       return $pdf->download("Planilla-".'.pdf');
 
 });
-
+*/
 Route::get("boleta", function(){
 
 /*
@@ -257,3 +256,12 @@ echo DNS1D::getBarcodePNGPath("4445645656", "PHARMA2T",3,33);
 	Route::get('listado-general', 'UsuarioController@create');
 	Route::get('todo-general', 'UsuarioController@todo');
 });*/
+
+///********************  NUEVAS RUTAS *****************************///
+//************** GRUPO DE RUTAS PARA TÉCNICO DEPARTAMENTAL ****************///
+Route::group(['prefix'=>'grupos/tecnicos/','middleware'=>'auth'], function(){
+	Route::get("exportar/planilla/{id}", 'MovimientoController@exportarPlanillaBeneficiarios');
+	Route::get("exportar/boletas/{id}", 'MovimientoController@exportarBoletasBeneficiarios');
+	//Route::get("exportar/boletas/{id}", "");
+
+});

@@ -33,6 +33,7 @@ class Movimiento extends Model
 		'ip_modificacion',
 		'nbeneficiario'
     ];   
+
     public static function listadoEventosPorComunidad($idMunicipio){
     	return DB::select(DB::raw("select 
     		movimiento.nbeneficiario as nbeneficiario,
@@ -64,5 +65,40 @@ class Movimiento extends Model
     	"));
     	
     	return (Object) $data[0];
+    }
+    public static function ubicacionMovimiento($id){
+    	return DB::select(DB::raw("
+    		select 
+			comunidad.nombre as comunidad,
+			municipio.nombre as municipio,
+			departamento.nombre as departamento
+			 from comunidad 
+				join municipio on municipio.id = comunidad.id_municipio
+			    join departamento on departamento.id = municipio.id_departamento
+			where comunidad.id = $id
+		"));
+    }
+    public static function dataMovimiento($id){
+    	return DB::select(DB::raw("
+    		select 
+			tipo_insumo.nombre as tipo,
+			insumo.nombre as insumo,
+			comunidad.nombre as comunidad,
+			municipio.nombre as municipio,
+			departamento.nombre as departamento,
+			date_format(movimiento.fecha_entrega,'%d-%m-%Y') as fecha_entrega,
+			nombre_extensionista,
+			cui_extensionista,
+			telefono_extensionista
+			 from movimiento 
+				join comunidad on comunidad.id = movimiento.id_comunidad
+				join municipio on municipio.id = comunidad.id_municipio
+			    join departamento on departamento.id = municipio.id_departamento
+			    join detalle_intervencion on detalle_intervencion.id = movimiento.id_detalle_intervencion
+			    join intervencion on intervencion.id = detalle_intervencion.id_intervencion
+			    join insumo on insumo.id = intervencion.id_insumo
+			    join tipo_insumo on tipo_insumo.id = insumo.id_tipo_insumo
+			where movimiento.id = $id
+    		"));
     }
 }
