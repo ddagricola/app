@@ -57,7 +57,7 @@ class Intervencion extends Model
                     join departamento on departamento.id = intervencion.id_departamento
                     join insumo on insumo.id = intervencion.id_insumo
                     join tipo_insumo on tipo_insumo.id = insumo.id_tipo_insumo
-                    where intervencion.estado = 1;
+                    where intervencion.estado = 1 and intervencion.id_usuario = $auth;
     	"));
     }
     public static function totalIntervencion($id){
