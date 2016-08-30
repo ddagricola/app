@@ -103,4 +103,22 @@ class UsuarioController extends Controller
     {
         //
     }
+    public function createRestaurarContrasena(){
+        $usuario = User::find(Auth::user()->id);
+        return view('usuario.restaurar',['user'=>$usuario]);        
+    }
+    public function storeRestaurarContrasena(Request $request){
+        $this->validate($request, [
+            'password' => 'required|min:6',
+        ],['password.required'=>'Campo obligatorio'
+        'password.min'=>'Contraseña debe contener al menos 6 caracteres.']);
+
+        $usuario = User::find(Auth::user()->id);
+        $usuario->password = bcrypt($request->password);
+        $usuario->fecha_modificacion = Carbon::now();
+        $usuario->ip_modificacion = $request->ip();
+        $usuario->email_modificacion = Auth::user()->email;        
+        $usuario->remember_token=null;
+        return redirect('/logout');        
+    }
 }

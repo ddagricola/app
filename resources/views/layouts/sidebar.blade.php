@@ -49,10 +49,29 @@
                 @if (Auth::user()->id_rol == 2)
                     <li>
                         <a href="{{ url('intervenciones/listado') }}" class="js_menu">
-                            <i class="fa fa-folder-o"></i>
+                            <i class="fa  fa-folder-open-o"></i>
                             <span>Intervenciones</span>
                         </a>
                     </li>
+                    <li class="treeview">
+                      <a href="#">
+                        <i class="fa fa-cogs"></i> <span>Configuración</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+                      <ul class="treeview-menu">
+                        <li>
+                            <a href="{{ url('grupos/tecnicos/configuracion/restauracion') }}"><i class="fa fa-key"></i>Restaurar Contraseña</a></li>
+                        <!--<li><a href=""><i class="fa fa-user-plus"></i> Editar mi Información</a></li>-->
+                      </ul>
+                    </li>
+                    <!--<li>
+                        <a href="{{ url('intervenciones/listado') }}" class="js_menu">
+                            <i class="fa fa-cogs"></i>
+                            <span>Configuración</span>
+                        </a>
+                    </li>-->
                 @elseif(Auth::user()->id_rol == 3)
                     <li>
                         <a href="{{ url('distribuciones/departamentos') }}">

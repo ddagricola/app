@@ -262,6 +262,8 @@ echo DNS1D::getBarcodePNGPath("4445645656", "PHARMA2T",3,33);
 Route::group(['prefix'=>'grupos/tecnicos/','middleware'=>'auth'], function(){
 	Route::get("exportar/planilla/{id}", 'MovimientoController@exportarPlanillaBeneficiarios');
 	Route::get("exportar/boletas/{id}", 'MovimientoController@exportarBoletasBeneficiarios');
+	Route::get("configuracion/restauracion",'UsuarioController@createRestaurarContrasena');
+	Route::post("configuracion/restauracion-save",'UsuarioController@storeRestaurarContrasena');
 	//Route::get("exportar/boletas/{id}", "");
 
 });
