@@ -110,7 +110,7 @@ class UsuarioController extends Controller
     public function storeRestaurarContrasena(Request $request){
         $this->validate($request, [
             'password' => 'required|min:6',
-        ],['password.required'=>'Campo obligatorio'
+        ],['password.required'=>'Campo obligatorio',
         'password.min'=>'Contraseña debe contener al menos 6 caracteres.']);
 
         $usuario = User::find(Auth::user()->id);
