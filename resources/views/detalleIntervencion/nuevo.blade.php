@@ -15,6 +15,7 @@
                     <h3 class="box-title">Detalle de intervención</h3>
                 </div>
                 <div class="box-body">
+                <div id="loader"></div>
                 <table class="table table-striped">
                         <tr>
                             <td><b>Base Legal:</b> </td><td>{{ $intervencion->nombre }}</td>

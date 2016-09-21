@@ -3,8 +3,8 @@
 @section('content')
 <section class="content-header">
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-folder-open"></i> Departamentos</a></li>
-        <li class="active">Listado de departamentos</li>
+        <li><a href="#"><i class="fa fa-folder-open"></i> Entregas</a></li>
+        <li class="active">Listado de entregas</li>
     </ol>
 </section><br>
 <section class="content">
@@ -12,23 +12,28 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
-                    <div class="btn-group" role="group" aria-label="...">
-                        <a href="javascript:history.back()" ="" class="btn btn-primary">
-                            <span class='glyphicon glyphicon-menu-left' aria-hidden='true'></span>
-                        </a>
+                    <div class="row">
+                        <!--<div class="col-md-3 pull-left">
+                            <button class="btn btn-primary btn-sm" type="button" id="add">Agregar fuente de financiamiento</button>
+                        </div>--->
                     </div>
-                    <h3>Distribución Municipal</h3>
                 </div>
                 <div class="box-body">
                     <table id="grid-paises" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>MUNICIPIOS DE {{$departamento->nombre}}</th>
+                                <th>Departamento</th>
+                                <th>Municipio</th>
+                                <th>Beneficiarios</th>
+                                <th>Insumos</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -41,12 +46,15 @@
 </section>
 <script src="{{ asset ('/bower_components/AdminLTE/plugins/jQuery/jQuery-2.2.0.min.js') }}"></script>
 <script type="text/javascript">
-function intervenciones(edit){
-    location.href = "{{ url('distribuciones/municipios/intervenciones') }}"+"/"+edit;
+function editar(value){
+    location.href = "{{ url('movimiento/listado-eventos/') }}"+"/"+value;
+}
+function desc(value){
+    location.href = "{{ url('intervencion-entregas/descripcion-grupo') }}"+"/"+value;
 }
 function remove(data){
     $.ajax({
-        url: "<?php echo url('departamentos/remove') ?>"+"/"+data,
+        url: "<?php echo url('fuentes-financiamiento/remove') ?>"+"/"+data,
         type : 'GET',
         error: function(){
             alert('Ha ocurrido un error en el servidor')
@@ -60,21 +68,25 @@ function remove(data){
 $(function(){
     $add = $("#add");
     $add.on('click', function(){
-        location.href="<?php echo url('mantenimiento/departamentos/create') ?>"
+        location.href="<?php echo url('mantenimiento/fuentes-financiamiento/create') ?>"
     });
         $('#grid-paises').DataTable({
-            "order": [[ 1, "asc" ]],
-            "ajax": "{{ url('distribuciones/municipios/todo') }}"+"/"+{{$departamento->id}},
+            "order": [[ 0, "desc" ]],
+            "ajax": "{{ url('intervencion-entregas/listados/todo') }}",
             "columnDefs": [
-
-                { "data": "municipio", "targets": 0},
+                { "data": "departamento", "targets": 0 },
+                { "data": "municipio", "targets": 1 },
+                { "data": "nbeneficiario", "targets": 2},
+                { "data": "insumos", "targets": 3 },
                 {
-                    "targets": 1,
-                    "data": "id_municipio",
+                    "targets": 4,
+                    "data": "id_grupo_intervencion",
+                    "visible": true,
                     "render": function ( data, type, full, meta ) {
-                        edit = "<a href='javascript:intervenciones("+data+")' id='edit' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Ver Intervenciones'><span class='glyphicon glyphicon-menu-right' aria-hidden='true'></span></a>";
+                        view = "<a href='javascript:desc("+data+")' id='edit' class='btn btn-warning btn-sm' data-toggle='tooltip' data-placement='top' title='Ver Descripción'><span class='glyphicon glyphicon-menu-hamburger' aria-hidden='true'></span></a>";
+                        edit = "<a href='javascript:editar("+data+")' id='edit' class='btn btn-primary btn-sm' data-toggle='tooltip' data-placement='top' title='Eventos'><span class='glyphicon glyphicon-home' aria-hidden='true'></span></a>";
                         del = "<a href='javascript:remove("+data+")' class='btn btn-danger btn-sm' data-toggle='tooltip' data-placement='top' title='Borrar'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>";
-                        return "<div class='pull-right'>" + edit +"</div>";
+                        return "<div class='pull-right'>" + view  + edit + del + "</div>";
                     }
                 },
             ],

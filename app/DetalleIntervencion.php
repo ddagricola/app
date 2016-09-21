@@ -30,11 +30,12 @@ class DetalleIntervencion extends Model
 		'precio',
 		'nbeneficiario',
 		'cantidad_beneficiario',
-		'id_unidad_entrega'
+		'id_unidad_entrega',
+    'agrupado'
     ];
     public static function detalleIntervencion($id){
     	return DB::select(DB::raw("
-    		select 
+    		select
 				municipio.id as id_municipio,
 				detalle_intervencion.id_unidad_medida,
 				fuente_financiamiento.id as id_fuente,
@@ -47,7 +48,7 @@ class DetalleIntervencion extends Model
 				detalle_intervencion.cantidad_beneficiario,
 				detalle_intervencion.estado,
 				detalle_intervencion.id_unidad_entrega
-				 from detalle_intervencion 
+				 from detalle_intervencion
 					join partida on partida.id = detalle_intervencion.id_partida_presupuestaria
 				    join renglon on renglon.id = partida.id_renglon
 				    join municipio on municipio.id = partida.id_municipio
@@ -61,7 +62,7 @@ class DetalleIntervencion extends Model
     }
     public static function detalleIntervencionIngreso($id){
     	return DB::select(DB::raw("
-    		select 
+    		select
 				intervencion.id as id_intervencion,
 				detalle_intervencion.id as id_detalle_intervencion,
 				case intervencion.orden
@@ -80,7 +81,7 @@ class DetalleIntervencion extends Model
 				end  as cantidad_por_beneficiario,
 				detalle_intervencion.cantidad,
 				unidad_medida.nombre as unidad_medida,
-				case unidad_medida.id 
+				case unidad_medida.id
 					when 1 then ( detalle_intervencion.cantidad*unidad_medida.cantidad_libra )
 				end as total_comprado,
 				detalle_intervencion.precio,
@@ -99,7 +100,7 @@ class DetalleIntervencion extends Model
     }
     public static function detalleIntervencionMunicipal($idMunicipio){
     	return DB::select(DB::raw("
-    		select 
+    		select
 				intervencion.id as id_intervencion,
 				detalle_intervencion.id as id_detalle_intervencion,
 				case intervencion.orden
@@ -116,7 +117,7 @@ class DetalleIntervencion extends Model
 				concat(detalle_intervencion.cantidad_beneficiario, ' ', medida_entrega.nombre) as cantidad_por_beneficiario,
 				detalle_intervencion.cantidad,
 				unidad_medida.nombre as unidad_medida,
-				case unidad_medida.id 
+				case unidad_medida.id
 					when 1 then ( detalle_intervencion.cantidad*unidad_medida.cantidad_libra )
 				end as total_comprado,
 				detalle_intervencion.precio,
@@ -131,12 +132,13 @@ class DetalleIntervencion extends Model
 				    join unidad_medida medida_entrega on medida_entrega.id = detalle_intervencion.id_unidad_entrega
 				    join partida on partida.id = detalle_intervencion.id_partida_presupuestaria
 				    where detalle_intervencion.estado = 1
+            and detalle_intervencion.agrupado is null
 				    and detalle_intervencion.id_municipio = $idMunicipio;
     	"));
     }
     public static function exportToExcel($id){
 		return DB::select(DB::raw('
-			select 
+			select
 				concat("#",intervencion.id ) as intervencion,
 				concat(departamento.codigo, "-", departamento.nombre) as departamento,
 				concat(municipio.codigo, "-", municipio.nombre) as municipio,
@@ -160,6 +162,6 @@ class DetalleIntervencion extends Model
 				    join partida on partida.id = detalle_intervencion.id_partida_presupuestaria
 				    join municipio on municipio.id = detalle_intervencion.id_municipio
 				    join departamento on departamento.id = municipio.id_departamento
-				    where intervencion.id = '.$id));    	
+				    where intervencion.id = '.$id));
     }
 }

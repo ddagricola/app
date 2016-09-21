@@ -53,12 +53,13 @@
 	}
 	.img-barcode img{
 		width: auto;
-		border:1px solid red;
+		/*border:1px solid red;*/
 	}
 </style>
 @foreach ($pages as $page)
 	<div class="page">
 		@foreach ($page as $item)
+
 			<div class="item-page">
 			<table class="header-table">
 				<tr>
@@ -66,9 +67,9 @@
 						<img src="{{public_path().'/img/logo-boletas.png'}}" style="width:500px;">
 					</td>
 					<td rowspan="2" class="img-barcode">
-						<!--<label>4542340000344</label>
+						<!--<label>4542340000344</label>-->
 							<img src="data:image/png;base64,{{$item->barcode}}" alt="barcode"   />
-						<label>4542340000344</label>-->
+						<!--<label>4542340000344</label>-->
 					</td>
 				</tr>
 			</table>
@@ -111,7 +112,7 @@
 					<tr>
 						<td width="18%" class="item-text">Lugar del evento:</td>
 						<td>
-							{{ $item->departamento_entrega }}, {{ $item->municipio }}, 
+							{{ $item->departamento_entrega }}, {{ $item->municipio }},
 							{{ $item->comunidad }}
 						</td>
 					</tr>
@@ -121,18 +122,34 @@
 							{{ $movimiento->fecha_entrega }}
 						</td>
 					</tr>
+					@if(Auth::user()->id_jefatura==5)
+					<tr>
+						<td class="item-text">Tipo de Insumo Entregado:</td>
+						<td>
+							{{ $item->tipo_insumo }}
+						</td>
+					</tr>
+					<tr>
+						<td class="item-text">Insumo Entregado:</td>
+						<td style='font-size:9px'>
+							{{ $item->insumo }}
+						</td>
+					</tr>
+					@else
 					<tr>
 						<td class="item-text">Insumo Entregado:</td>
 						<td>
 							{{ $item->tipo_insumo }} {{ $item->insumo }}
 						</td>
 					</tr>
-					<tr>
+					<!--<tr>
 						<td class="item-text">Cantidad Entregada:</td>
 						<td>
 							{{ $item->cantidad_beneficiario }} {{$item->unidad_entrega}}
 						</td>
-					</tr>
+					</tr>-->
+					@endif
+
 				</table>
 				<table class="footer-table">
 					<tr>

@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>apps.ddagricola.gt</title>
+    <title>app.ddagricola.gt</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap 3.3.2 -->
@@ -70,14 +70,14 @@
           /*$('.datepicker').datepicker({
             format: 'dd/mm/yyyy',
           });*/
-        var _smartsupp = _smartsupp || {};
+        /*var _smartsupp = _smartsupp || {};
         _smartsupp.key = '4207532b3e35c3150cebe8c8caf5183a5c30a02c';
         window.smartsupp||(function(d) {
             var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
             s=d.getElementsByTagName('script')[0];c=d.createElement('script');
             c.type='text/javascript';c.charset='utf-8';c.async=true;
             c.src='//www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
-        })(document);
+        })(document);*/
         </script>
     </body>
 </html>

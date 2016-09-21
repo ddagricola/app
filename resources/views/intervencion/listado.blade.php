@@ -46,6 +46,9 @@
 </section>
 <script src="{{ asset ('/bower_components/AdminLTE/plugins/jQuery/jQuery-2.2.0.min.js') }}"></script>
 <script type="text/javascript">
+function grupoIntervencion(){
+  $('#grid-paises').empty();
+}
 function intervencion(edit){
     //location.href = "{{ url('intervenciones/nuevo') }}"+"/"+edit;
     location.href = "{{ url('intervenciones/listado') }}"+"/"+edit;
@@ -71,7 +74,7 @@ $(function(){
         $('#grid-paises').DataTable({
             "order": [[ 0, "desc" ]],
             "ajax": "{{ url('intervenciones/general/todo/') }}"+"/"+ <?php //echo $jefatura->id?>,
-            "columnDefs": [ 
+            "columnDefs": [
                 { "data": "anio", "targets": 0 },
                 { "data": "nombre", "targets": 1 },
                 { "data": "fuente", "targets": 2},

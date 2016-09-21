@@ -17,18 +17,28 @@
                             <span class='glyphicon glyphicon-menu-left' aria-hidden='true'></span>
                         </a>
                     </div>
-                    <h3>Distribución Municipal</h3>
+                    <h3>Distribuciones {{ $municipio->nombre }}</h3>
                 </div>
                 <div class="box-body">
                     <table id="grid-paises" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>MUNICIPIOS DE {{$departamento->nombre}}</th>
+                                <!--<th>Intervención</th>-->
+                                <th>Departamento</th>
+                                <th>Municipio</th>
+                                <th>Insumo</th>
+                                <th>Beneficiarios</th>
+                                <th>Cantidad por beneficiario</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
+                                <!--<th></th>-->
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -41,39 +51,28 @@
 </section>
 <script src="{{ asset ('/bower_components/AdminLTE/plugins/jQuery/jQuery-2.2.0.min.js') }}"></script>
 <script type="text/javascript">
-function intervenciones(edit){
-    location.href = "{{ url('distribuciones/municipios/intervenciones') }}"+"/"+edit;
+function ingreso(edit){
+    location.href = "{{ url('movimiento/municipal', $municipio->id) }}"+"/"+edit;;
+    //location.href = "{{ url('distribuciones/municipios/intervenciones/ingreso') }}"+"/"+edit;
 }
-function remove(data){
-    $.ajax({
-        url: "<?php echo url('departamentos/remove') ?>"+"/"+data,
-        type : 'GET',
-        error: function(){
-            alert('Ha ocurrido un error en el servidor')
-        },
-        success: function(data){
-            $('#grid-paises').DataTable().ajax.reload();
-        }
-    });
-}
-
 $(function(){
-    $add = $("#add");
-    $add.on('click', function(){
-        location.href="<?php echo url('mantenimiento/departamentos/create') ?>"
-    });
+
         $('#grid-paises').DataTable({
             "order": [[ 1, "asc" ]],
-            "ajax": "{{ url('distribuciones/municipios/todo') }}"+"/"+{{$departamento->id}},
+            "ajax": "{{ url('distribuciones/municipios/intervenciones/todo') }}"+"/"+{{$municipio->id}},
             "columnDefs": [
 
-                { "data": "municipio", "targets": 0},
+                //{ "data": "orden", "targets": 0},
+                { "data": "departamento", "targets": 0},
+                { "data": "municipio", "targets": 1},
+                { "data": "insumo", "targets": 2},
+                { "data": "beneficiarios", "targets": 3},
+                { "data": "cantidad_por_beneficiario", "targets": 4},
                 {
-                    "targets": 1,
-                    "data": "id_municipio",
+                    "targets": 5,
+                    "data": "id_detalle_intervencion",
                     "render": function ( data, type, full, meta ) {
-                        edit = "<a href='javascript:intervenciones("+data+")' id='edit' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Ver Intervenciones'><span class='glyphicon glyphicon-menu-right' aria-hidden='true'></span></a>";
-                        del = "<a href='javascript:remove("+data+")' class='btn btn-danger btn-sm' data-toggle='tooltip' data-placement='top' title='Borrar'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>";
+                        edit = "<a href='javascript:ingreso("+data+")' id='edit' class='btn btn-primary btn-sm' data-toggle='tooltip' data-placement='top' title='Eventos'><span class='glyphicon glyphicon-home' aria-hidden='true'></span></a>";
                         return "<div class='pull-right'>" + edit +"</div>";
                     }
                 },

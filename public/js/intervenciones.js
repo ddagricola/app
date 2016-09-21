@@ -142,9 +142,12 @@ $(function(){
         error: function(){
           alert('Ha ocurrido un error en el servidor')
         },
+        beforeSend: function(){
+          $("#loader").append("<div class='overlay'><i class='fa fa-refresh fa-spin'></i></div>");
+        },
         success: function(data){
           //location.href = "../../intervenciones/listado";
-          location.reload()
+          //location.reload()
         }
       });
     }

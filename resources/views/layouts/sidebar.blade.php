@@ -8,7 +8,7 @@
             <div class="pull-left info">
                 <p>{{ \App\Colaborador::nombreAuth() }}</p>
                 <!-- Status -->
-                <a href="#" style="font-size:9px"><i class="fa fa-circle text-success"></i> 
+                <a href="#" style="font-size:9px"><i class="fa fa-circle text-success"></i>
                     {{ \App\Jefatura::find(Auth::user()->id_jefatura)->nombre }}
                 </a>
             </div>
@@ -49,8 +49,20 @@
                 @if (Auth::user()->id_rol == 2)
                     <li>
                         <a href="{{ url('intervenciones/listado') }}" class="js_menu">
-                            <i class="fa  fa-folder-open-o"></i>
+                            <i class="fa  fa-folder-o"></i>
                             <span>Intervenciones</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('distribuciones/departamentos') }}">
+                            <i class="fa fa-folder-o"></i>
+                            <span>Distribuciones</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('intervencion-entregas/listado') }}">
+                            <i class="fa fa-folder-o"></i>
+                            <span>Entregas</span>
                         </a>
                     </li>
                     <li class="treeview">
@@ -73,12 +85,18 @@
                         </a>
                     </li>-->
                 @elseif(Auth::user()->id_rol == 3)
-                    <li>
+                  <li>
+                      <a href="{{ url('intervencion-entregas/listado') }}">
+                          <i class="fa fa-folder-o"></i>
+                          <span>Entregas</span>
+                      </a>
+                  </li>
+                    <!--<li>
                         <a href="{{ url('distribuciones/departamentos') }}">
                             <i class="fa fa-folder-o"></i>
                             <span>Distribuciones</span>
                         </a>
-                    </li>
+                    </li>-->
                 @elseif(Auth::user()->id_rol == 4)
                     <li>
                         <a href="{{ url('/') }}">
@@ -92,14 +110,14 @@
                             <i class="fa  fa-male"></i>
                             <span>Empleados</span>
                         </a>
-                    </li> 
+                    </li>
                 @else
                 <li>
                     <a href="{{ url('recepcion/colaboradores/listado') }}">
                         <i class="fa  fa-male"></i>
                         <span>Empleados</span>
                     </a>
-                </li> 
+                </li>
                     <li>
                         <a href="{{ url('mantenimiento/puestos') }}">
                             <i class="fa fa-newspaper-o"></i>

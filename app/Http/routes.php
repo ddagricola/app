@@ -120,13 +120,18 @@ Route::get('puestos/remove/{id}','PuestoController@delete');
 
 Route::group(['prefix'=>'configuration','middleware'=>'auth'], function(){
 	Route::resource('usuario','UsuarioController');
-	
+
 	//Route::get('usuario/cuenta','ColaboradorController@configCuenta');
 	//Route::post('usuario/store','ColaboradorController@store');
 	//Route::get('listado-general', 'UsuarioController@create');
 	//Route::get('todo-general', 'UsuarioController@todo');
 });
 
+Route::group(['prefix'=>'intervencion-entregas','middleware'=>'auth'], function(){
+  Route::get('listado','GrupoEntregaController@index');
+  Route::get('listados/todo','GrupoEntregaController@todoGrupoIntervencion');
+  Route::get('descripcion-grupo/{id}', 'GrupoEntregaController@descripcionGrupo');
+});
 Route::group(['prefix'=>'distribuciones','middleware'=>'auth'], function(){
 	Route::get('departamentos','DistribucionController@listadoDepartamentos');
 	Route::get('municipios/{idDepartamento}','DistribucionController@listadoMunicipios');
@@ -137,6 +142,8 @@ Route::group(['prefix'=>'distribuciones','middleware'=>'auth'], function(){
 	Route::get('municipios/intervenciones/ingreso/{id}','DistribucionController@intervencionIngreso');
 
 	Route::post('beneficiario/ingreso', 'DistribucionController@ingresoBeneficiario');
+  // Rutas para agrupar detalle de intervencion.
+  Route::post('agrupar-detalle', 'GrupoEntregaController@createGrupoIntervencion');
 });
 
 Route::group(['prefix'=>'movimiento','middleware'=>'auth'], function(){
@@ -145,6 +152,9 @@ Route::group(['prefix'=>'movimiento','middleware'=>'auth'], function(){
 	Route::post('comunidad/evento-nuevo','MovimientoController@nuevoEventoComunidad');
 	Route::get('comunidad/todo-eventos/{id}','MovimientoController@todoEventoComunidad');
 	Route::get("beneficiarios/evento/{id}", "MovimientoController@eventoBeneficiarios");
+  //Nuevas rutas para el manejo de los eventos desde un grupo de intervenciones
+  Route::get('listado-eventos/{id}', 'MovimientoController@listadoEntregas');
+
 });
 
 Route::group(['prefix'=>'recepcion','middleware'=>'auth'], function(){
@@ -173,22 +183,22 @@ Route::get("recepcion/colaboradores/remove/{id}", "ColaboradorController@delete"
 	$pagesItem = [];
 	$registerCount = 0;
 	$pagesCount = 0;
-	
+
 	foreach ($data as $value) {
 		if($registerCount == 10){
 			array_push($pages, $pagesItem);
 			$pagesItem = [];
 			$registerCount =0;
-		}	
+		}
 		array_push($pagesItem, $value);
 		$registerCount++;
 	}
 
 	array_push($pages,$pagesItem);
-	
+
 	$pdf = \PDF::loadView('movimiento.planilla-beneficiarios-evento',
 		[
-			
+
 		'movimiento'=>$movimiento,
 		'pages'=>$pages,
 		])->setPaper("A4","landscape");
@@ -215,10 +225,10 @@ echo DNS1D::getBarcodeHTML("4445645656", "PHARMA2T",3,33);
 echo '<img src="' . DNS1D::getBarcodePNG("4", "C39+",3,33) . '" alt="barcode"   />';
 echo DNS1D::getBarcodePNGPath("4445645656", "PHARMA2T",3,33);
 *///echo '<img src="data:image/png;base64,' . DNS1D::getBarcodePNG("999999999999", "C39+",1,50) . '" alt="barcode"   />';
-//die;	
+//die;
 	$data = \App\MovimientoBeneficiario::beneficiariosIngresoEvento(1);
 	$movimiento = \App\Movimiento::find(1);
-	
+
 	//--- LOGICA PARA HOJAS DE PDF --//
 	$pages = [];
 	$i=0;
@@ -234,17 +244,17 @@ echo DNS1D::getBarcodePNGPath("4445645656", "PHARMA2T",3,33);
 			array_push($pages, $pagesItem);
 			$pagesItem = [];
 			$registerCount =0;
-		}	
+		}
 		array_push($pagesItem, $value);
 		$registerCount++;
 	}
-	
+
 	array_push($pages,$pagesItem);
-	
+
 	//return view('movimiento.boleta-beneficiarios-evento',['pages'=>$pages]);die;
 	$pdf = \PDF::loadView('movimiento.boleta-beneficiarios-evento',
 		[
-			
+
 		'movimiento'=>$movimiento,
 		'pages'=>$pages,
 		])->setPaper("A4"); //,"landscape"
