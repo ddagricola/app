@@ -15,7 +15,7 @@ $(function(){
   $("#save").on('click', function(e){
     error = 0;
     data = [];
-    
+
     if($("#content-detalle tr").length > 0){
       $("#content-detalle tr").each(function(i, element){
         $this = $(this);
@@ -25,7 +25,7 @@ $(function(){
         id_medida = $this.children().find('select.jsmedida').val();
         //id_fuente = $this.children().find('select.jsfuente').val();
         //id_renglon = $this.children().find('select.jsrenglon').val();
-        //id_partida = $this.children().find('select.jspartida').val();     
+        //id_partida = $this.children().find('select.jspartida').val();
         cantidad = $this.children().find('input.jscantidad').val();
         precio = $this.children().find('input.jsprecio').val();
         beneficiario = $this.children().find('input.jsbeneficiario').val();
@@ -33,7 +33,7 @@ $(function(){
         state  = $this.children().find('input.jsstate').val();
         cantidad_beneficiario  = $this.children().find('input.jscantidadBeneficiario').val();
         medida_entrega  = $this.children().find('select.jsmedidaEntrega').val();
-        
+
         if(id_municipio==''){
           $this.children().find('#municipio_'+i).parent().addClass('has-error')
           error = 1;
@@ -146,6 +146,8 @@ $(function(){
           $("#loader").append("<div class='overlay'><i class='fa fa-refresh fa-spin'></i></div>");
         },
         success: function(data){
+          $("#loader").empty();
+          location.reload();
           //location.href = "../../intervenciones/listado";
           //location.reload()
         }

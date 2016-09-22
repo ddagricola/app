@@ -23,7 +23,7 @@ class DetalleIntervencionController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**
@@ -45,13 +45,13 @@ class DetalleIntervencionController extends Controller
 
         $unidades = UnidadMedida::whereEstado(1)->get();
         return view("detalleIntervencion.nuevo",[
-            "total"=>$total,    
+            "total"=>$total,
             "totalBeneficiarios"=>$totalBeneficiarios,
             "unidades"=>$unidades,
-            "intervencion"=>$intervencion, 
+            "intervencion"=>$intervencion,
             "detalles"=>$detalles,
             'fuentes'=>$fuente,
-            "renglones"=>$renglones, 
+            "renglones"=>$renglones,
             "municipio"=>$municipio
             ]);
     }
@@ -167,6 +167,8 @@ class DetalleIntervencionController extends Controller
                 $detalleIntervencion->id_unidad_entrega = $detalle["medida_entrega"];
                 $detalleIntervencion->ip_modificacion = $request->ip();
                 $detalleIntervencion->save();
+
+
             }else if($detalle["state"] == "delete"){
                 $detalleIntervencion = DetalleIntervencion::find($detalle['id']);
                 //$detalleIntervencion->id_intervencion = $request->id_intervencion;

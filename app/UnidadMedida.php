@@ -14,13 +14,14 @@ class UnidadMedida extends Model
      * @var array
      */
     protected $fillable = [
-        'nombre',
+    'nombre',
 		'estado',
 		'fecha_creacion',
 		'email_creacion',
 		'ip_creacion',
 		'fecha_modificacion',
 		'email_modificacion',
-		'ip_modificacion'
+		'ip_modificacion',
+    'abreviatura'
     ];
 }

@@ -142,10 +142,9 @@ class MovimientoBeneficiario extends Model
         select
         group_concat(
         	concat(
-                insumo.nombre,' ',
-                ': ',detalle_intervencion.cantidad_beneficiario,
-                ' ',unidad_medida.nombre
-
+                detalle_intervencion.cantidad_beneficiario,' ',
+                unidad_medida.abreviatura,'. DE ',
+                insumo.nombre
         	)
 
          ) as insumo
