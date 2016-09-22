@@ -43,16 +43,29 @@
 		width: 100%;
 	}
 	.img-barcode{
-		width: 50%;
+		/*height: 50px;
+		position: relative;*/
+		/*width: 50%;*/
 		/*border:1px solid blue;*/
-		text-align: center;
-		padding:0px;
+		/*text-align: center;*/
+		/*padding:0px;*/
 	}
-	.img-barcode label{
+	.img-barcode span{
 		width: 100%;
 	}
 	.img-barcode img{
-		width: auto;
+		/*width: auto;*/
+		/*border:1px solid red;*/
+	}
+	.box-barcode{
+		width: 100%;
+		/*border:1px solid red;*/
+	}
+	.box-codigo, .box-barcode	{
+		text-align: center;
+	}
+	.box-codigo{
+		width: 100%;
 		/*border:1px solid red;*/
 	}
 </style>
@@ -64,11 +77,23 @@
 			<table class="header-table">
 				<tr>
 					<td width="70%">
-						<img src="{{public_path().'/img/logo-boletas.png'}}" style="width:500px;">
+						@if(Auth::user()->id_jefatura==1)
+							<img src="{{public_path().'/img/BOLETA-GRANOSBASICOS.jpg'}}" style="width:500px;">
+						@elseif(Auth::user()->id_jefatura==5)
+							<img src="{{public_path().'/img/BOLETA-HORTICULTURA.jpg'}}" style="width:500px;">
+						@endif
+						<!--<img src="{{public_path().'/img/logo-boletas.png'}}" style="width:500px;">-->
 					</td>
-					<td rowspan="2" class="img-barcode">
+					<td class="img-barcode">
+						<div class="box-barcode">
+								<img src="data:image/png;base64,{{$item->barcode}}"/>
+						</div>
+						<div class="box-codigo">
+							<span>{{$item->code}}</span>
+						</div>
 						<!--<label>4542340000344</label>-->
-							<img src="data:image/png;base64,{{$item->barcode}}" alt="barcode"   />
+							<!--<img src="data:image/png;base64,{{$item->barcode}}" alt="barcode"  style="border:1px solid red" />
+							<span style="text-align:center">{{$item->code}}</span>-->
 						<!--<label>4542340000344</label>-->
 					</td>
 				</tr>
@@ -137,11 +162,23 @@
 					</tr>
 					@else
 					<tr>
+						<td class="item-text">Tipo de Insumo Entregado:</td>
+						<td>
+							{{ $item->tipo_insumo }}
+						</td>
+					</tr>
+					<tr>
+						<td class="item-text">Insumo Entregado:</td>
+						<td>
+							{{ $item->insumo }}
+						</td>
+					</tr>
+					<!--<tr>
 						<td class="item-text">Insumo Entregado:</td>
 						<td>
 							{{ $item->tipo_insumo }} {{ $item->insumo }}
 						</td>
-					</tr>
+					</tr>-->
 					<!--<tr>
 						<td class="item-text">Cantidad Entregada:</td>
 						<td>

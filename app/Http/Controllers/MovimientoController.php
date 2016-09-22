@@ -250,6 +250,8 @@ class MovimientoController extends Controller
         $complete = 0;
         $cantCompleto=null;
         $zeros = "";
+
+
         foreach ($data as $value) {
             $max = MovimientoBeneficiario::maxBeneficiario();
             $lengthCrypto = strlen($value->id_beneficiario);
@@ -263,10 +265,11 @@ class MovimientoController extends Controller
             }
 
             $crypto = $zeros.$value->id_movimiento_beneficiario;
-            
+
             //$value->{'barcode'} = DNS1D::getBarcodePNG($crypto, "C39+",1,30);
             $value->{'barcode'} = DNS1D::getBarcodePNG($crypto, "C128",3,30);
-            $value->{'insumo'} = MovimientoBeneficiario::insumosGrupoIntervencion($id);
+            $value->{'insumo'} = MovimientoBeneficiario::insumosCadena(MovimientoBeneficiario::insumosGrupoIntervencion($id));//MovimientoBeneficiario::insumosGrupoIntervencion($id);
+            $value->{'code'} = $value->id_beneficiario.$crypto;
             //$value['codebar'] = [];
             if($registerCount == 3){
                 array_push($pages, $pagesItem);

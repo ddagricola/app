@@ -140,14 +140,17 @@ class MovimientoBeneficiario extends Model
     public static function insumosGrupoIntervencion($id){
       $data = DB::select(DB::raw("
         select
-        group_concat(
+        /*group_concat(
         	concat(
                 detalle_intervencion.cantidad_beneficiario,' ',
                 unidad_medida.abreviatura,'. DE ',
                 insumo.nombre
         	)
 
-         ) as insumo
+         ) as insumo*/
+          detalle_intervencion.cantidad_beneficiario,
+        	unidad_medida.nombre as medida,
+        	insumo.nombre
         			 from movimiento
         				join comunidad on comunidad.id = movimiento.id_comunidad
         				join municipio on municipio.id = comunidad.id_municipio
@@ -164,6 +167,22 @@ class MovimientoBeneficiario extends Model
                     and detalle_grupo.estado = 1 ;
       "));
 
-      return $data[0]->insumo;
+      return $data;//$data[0]->insumo;
+    }
+
+    public function scopeInsumosCadena($query, $registros){
+      $cadena = "";
+      $cadenaClean = "";
+
+        foreach ($registros as $registro) {
+          //verificamos si la cantidad para el beneficiario es float o entero
+          if(is_float($registro->cantidad_beneficiario)){
+            $cadena.=$registro->cantidad_beneficiario." ".$registro->medida." DE ".$registro->nombre.",";
+          }else{
+            $cadena.=number_format($registro->cantidad_beneficiario,1)." ".$registro->medida." DE ".$registro->nombre.",";
+          }
+        }
+        $cadenaClean = substr($cadena, 0, -1);
+        return $cadenaClean;
     }
 }
