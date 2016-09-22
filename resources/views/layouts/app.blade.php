@@ -34,7 +34,7 @@
         <link rel="stylesheet" href="{{ asset('/bower_components/AdminLTE/plugins/datepicker/datepicker3.css') }}">
         <style type="text/css">
         .select2-container--default .select2-selection--single {
-            border-radius: 0px; 
+            border-radius: 0px;
             padding: 5px
         }
         .visitado{
@@ -70,14 +70,14 @@
           /*$('.datepicker').datepicker({
             format: 'dd/mm/yyyy',
           });*/
-        /*var _smartsupp = _smartsupp || {};
+        var _smartsupp = _smartsupp || {};
         _smartsupp.key = '4207532b3e35c3150cebe8c8caf5183a5c30a02c';
         window.smartsupp||(function(d) {
             var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
             s=d.getElementsByTagName('script')[0];c=d.createElement('script');
             c.type='text/javascript';c.charset='utf-8';c.async=true;
             c.src='//www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
-        })(document);*/
+        })(document);
         </script>
     </body>
 </html>
