@@ -35,6 +35,7 @@ class MovimientoBeneficiario extends Model
     public static function beneficiariosIngresoEvento($id){
       return DB::select(DB::raw("
       select
+      intervencion.nombre as nombre_intervencion,
 	unidad_entrega.nombre as unidad_entrega,
     insumo.nombre as insumo,
     tipo_insumo.nombre as tipo_insumo,

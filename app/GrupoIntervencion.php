@@ -64,7 +64,7 @@ class GrupoIntervencion extends Model
         concat(municipio.nombre, ' - ',municipio.codigo) as municipio,
         -- detalle_intervencion.nbeneficiario,
         concat(tipo_insumo.nombre, '-', insumo.nombre) as insumo,
-        concat(detalle_intervencion.id, ' ', unidad_medida.nombre,' POR BENEFICIARIO') as cantidad
+        concat(detalle_intervencion.cantidad_beneficiario, ' ', unidad_medida.nombre,' POR BENEFICIARIO') as cantidad
         -- group_concat(insumo.nombre) as insumos
     	from detalle_grupo
         join detalle_intervencion on detalle_intervencion.id = detalle_grupo.id_detalle_intervencion

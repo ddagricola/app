@@ -200,7 +200,6 @@ class MovimientoController extends Controller
     $data = MovimientoBeneficiario::beneficiariosIngresoEvento($id);
     $movimiento = Movimiento::dataMovimiento($id);
     $movimientoObject = (Object) $movimiento[0];
-
     /*$movimiento = Movimiento::find($id);
     $ubicacionMovimiento = Movimiento::ubicacionMovimiento($id);*/
     //--- LOGICA PARA HOJAS DE PDF --//
@@ -228,6 +227,7 @@ class MovimientoController extends Controller
 
         'movimiento'=>$movimientoObject,
         'pages'=>$pages,
+        'legend'=>$data[0]->nombre_intervencion
         ])->setPaper("A4","landscape");
       return $pdf->download("planilla".substr(\Crypt::encrypt($id), 0, 9).'.pdf');
     }

@@ -9,7 +9,7 @@
 		margin-top: 0%;
 		margin-bottom: 1%;
 		border: 1px solid red;
-	}	
+	}
 	.first-row td{
 		border-bottom:1px solid black;
 	}
@@ -19,14 +19,14 @@
 		font-weight: 400;
 		border: 1.2px solid black
 	}
-	
+
 	.header-label{
 		font-size: 24px;
 	}
 	.header-table{
 		width:100%;
 		border-collapse: collapse;
-		
+
 	}
 	.header-table tr td{
 		padding: 3px;
@@ -57,14 +57,14 @@
 		letter-spacing: 3px
 	}
 	.table-from-picture tr td {
-		
+
 		font-size: 12px;
 	}
 	.table-from-picture tr td label{
 		font-size: 18px;
 	}
 	.table-from-picture tr td p{
-		
+
 	}
 	.border-bottom{
 		border-bottom: 1px solid black;
@@ -97,7 +97,7 @@
 				</td>
 				<td rowspan="2" class="box-legend" width="35%" height="10px">
 					<p style="text-align:justify">
-					Adquisión de semilla certificada de ajonjolí variedad ICTA R-198, modalidad de compra directa, correspondiente al concurso NOG 5194016
+					{{$legend}}
 						<!--<label style="width:100%;font-weight:bold;font-size:12px">CONVENIO DE COOPERACION TECNICA No. 33-2014</label>
 						<b>Proyecto:</b>Fortalecimiento de la Capacidad de Producción de semillas mejoradas del Instituto de Ciencia y Tecnología Agrícolas -ICTA- para atender a los danmificados de la canicula prolongada del año <?php date("Y")?>-->
 					</p>
@@ -107,14 +107,14 @@
 				<td width="1%">INSUMO ENTREGADO:</td>
 				<td class="border-bottom" colspan="2" height="10px">
 					<?php $insumo = $movimiento->tipo.' '.$movimiento->insumo?>
-					<?php 
+					<?php
 						if(strlen($insumo) > 48){
 							echo "<label style='font-size:16px'>$insumo</label>";
 						}else{
 							echo "<label>$insumo</label>";
 						}
 					?>
-					
+
 				</td>
 			</tr>
 		</table>
@@ -144,7 +144,7 @@
 				<th>(10) SEXO</th>
 				<th>(11) CANTIDAD (libras)</th>
 				<th>(12) FIRMA O HUELLA DIGITAL</th>
-			</tr>	
+			</tr>
 		</thead>
 			<tbody>
 			<?php $i = 1; ?>
