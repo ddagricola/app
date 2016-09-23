@@ -39,6 +39,13 @@ class GrupoIntervencion extends Model
     return $data[0];
   }
   public static function municipioGrupoIntervencion($id){
+    /*echo "select detalle_intervencion.id_municipio from grupo_intervencion
+    join detalle_grupo on detalle_grupo.id_grupo_intervencion = grupo_intervencion.id
+    join detalle_intervencion on detalle_grupo.id_detalle_intervencion = detalle_intervencion.id
+    where grupo_intervencion.id = $id
+      and grupo_intervencion.estado = 1
+        and detalle_intervencion.estado = 1
+        group by grupo_intervencion.id limit 1";die;*/
     $data = DB::select(DB::raw("
       select detalle_intervencion.id_municipio from grupo_intervencion
       join detalle_grupo on detalle_grupo.id_grupo_intervencion = grupo_intervencion.id
@@ -92,5 +99,5 @@ class GrupoIntervencion extends Model
     "));
   }
 
-  
+
 }

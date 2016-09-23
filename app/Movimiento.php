@@ -35,6 +35,7 @@ class Movimiento extends Model
 		'nbeneficiario'
     ];
     public static function listadoEventosComunidad($idMunicipio){ //con grupos
+      //echo $idMunicipio;die;
         return DB::select(DB::raw("
         select
                 grupo_intervencion.id as id_grupo_intervencion,
@@ -57,7 +58,8 @@ class Movimiento extends Model
                   join intervencion on intervencion.id = detalle_intervencion.id_intervencion
                   join insumo on insumo.id = intervencion.id_insumo
                   join usuario on usuario.id = intervencion.id_usuario
-                  where usuario.id_jefatura = ".Auth::user()->id_jefatura."
+                  where municipio.id = $idMunicipio
+                  -- where usuario.id_jefatura = ".Auth::user()->id_jefatura."
                   and movimiento.estado = 1
                   group by movimiento.id
 
