@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="btn-group">
-                              <h3>Distribución Municipal <h5>Departamento de DeFruta y Agroindustria</h5></h3>
+                              <h3>Distribución Municipal <h5>Departamento de {{ \App\Jefatura::find(Auth::user()->id_jefatura)->nombre }}</h5></h3>
                             </div>
                         </div>
                     </div>
