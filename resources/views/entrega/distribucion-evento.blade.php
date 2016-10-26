@@ -145,7 +145,8 @@ function getGrid(flag){
                   //download = "<a href='javascript:descargar("+data+")'  id='edit' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Recursos'><span class='glyphicon glyphicon-save' aria-hidden='true'></span></a>";
                   //listado = "<a href='javascript:descargar("+data+")'  id='edit' class='btn btn-info btn-sm' data-toggle='tooltip' data-placement='top' title='Beneficiarios Ingresados'><span class='glyphicon glyphicon-user' aria-hidden='true'></span></a>";
                   deletes = "<a href='javascript:descargar("+data+")'  id='edit' class='btn btn-danger btn-sm' data-toggle='tooltip' data-placement='top' title='Eliminar Distribución'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>";
-                  return "<div class='pull-right'>" + intv + deletes+"</div>";
+                  return "<div class='pull-right'>" + intv +"</div>";
+                  //+ deletes+
               }
           },
       ],
