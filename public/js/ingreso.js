@@ -110,7 +110,8 @@ $(function(){
         		}
       		});
 			$.ajax({
-		        url: "../../../../../distribuciones/beneficiario/ingreso",
+		        //url: "../../../../../distribuciones/beneficiario/ingreso",
+						url: "../../../../../entregas/distribucion-municipal/beneficiario/ingreso",
 		        type : 'POST',
 		        data:{
 		        	'cui': $.trim($("#cui").val()),
@@ -131,6 +132,7 @@ $(function(){
 		        	'id':$id.val(),
 		        	'event':$event.val(),
 		        	'id_evento':$id_evento.val(),
+							'id_distribucion_movimiento': $id_distribucion_movimiento.val(),
 		        	'leer': ($leer.is(":checked"))? 1 : 0,
 		        	'escribir': ($escribir.is(":checked")) ? 1 : 0
 		        },
@@ -163,7 +165,7 @@ $(function(){
       		$.ajax({
         		url: "../../../../beneficiario/cui/",
         		type : 'GET',
-        		data: {	
+        		data: {
           			'cui': $.trim($cui.val()),
         		},
         		error: function(){
@@ -172,10 +174,10 @@ $(function(){
         		beforeSend: function(){
         			$primer_nombre.val('');
 					$segundo_nombre.val('');
-					$tercer_nombre.val('');	
-					$primer_apellido.val('');	
-					$segundo_apellido.val('');	
-					$apellido_casada.val('');	
+					$tercer_nombre.val('');
+					$primer_apellido.val('');
+					$segundo_apellido.val('');
+					$apellido_casada.val('');
         			$("#content-over").html('<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
         		},
         		success: function(data){
@@ -208,9 +210,9 @@ $(function(){
         				$id.val(element.id);
         				$primer_nombre.val(element.primer_nombre);
 						$segundo_nombre.val(element.segundo_nombre);
-						$tercer_nombre.val(element.tercer_nombre);	
-						$primer_apellido.val(element.primer_apellido);	
-						$segundo_apellido.val(element.segundo_apellido);	
+						$tercer_nombre.val(element.tercer_nombre);
+						$primer_apellido.val(element.primer_apellido);
+						$segundo_apellido.val(element.segundo_apellido);
 						$apellido_casada.val(element.apellido_casada);
 						$fecha_nacimiento.val(element.fecha_nacimiento_st);
 						$event.val(element.event);

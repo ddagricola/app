@@ -142,7 +142,7 @@
 				<th>(8) ETNIA</th>
 				<th>(9) EDAD</th>
 				<th>(10) SEXO</th>
-				<th>(11) CANTIDAD (libras)</th>
+				<th>(11) CANTIDAD ({{ strtolower($medidaEntrega) }})</th>
 				<th>(12) FIRMA O HUELLA DIGITAL</th>
 			</tr>
 		</thead>

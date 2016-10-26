@@ -19,3 +19,6 @@ bootstrap/cache/
 
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
+
+#temp
+resources/views/movimiento/boleta2-beneficiarios-evento.blade.php

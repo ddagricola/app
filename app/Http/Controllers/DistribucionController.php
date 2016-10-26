@@ -101,6 +101,7 @@ class DistribucionController extends Controller
     }
     public function ingresoBeneficiario(Request $request){
         $id_beneficiario = null;
+        //var_dump($request->all());die;
         if($request->event=="update"){
 
             $this->validate($request, [
@@ -193,6 +194,7 @@ class DistribucionController extends Controller
                 $movimiento->id_movimiento = $request->id_evento;
                 $movimiento->id_beneficiario = $id_beneficiario;
                 $movimiento->estado = 1;
+                $movimiento->id_distribucion_movimiento = $request->id_distribucion_movimiento;
                 $movimiento->fecha_creacion = Carbon::now();
                 $movimiento->email_creacion = (Auth::check()) ? Auth::user()->email : 'Guest';
                 $movimiento->ip_creacion = $request->ip();
@@ -218,5 +220,5 @@ class DistribucionController extends Controller
        return str_replace($search, $replace, $input);
     }
 
-    
+
 }

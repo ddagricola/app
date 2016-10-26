@@ -18,6 +18,7 @@ $escribir = $("#escribir");
 $event = $("#event");
 $id = $("#id");
 $id_evento = $("#id_evento");
+$id_distribucion_movimiento = $("#id_distribucion_movimiento");
 function DetalleIntervencion(){
 	this.id_municipio = null;
 	this.id_medida = null;

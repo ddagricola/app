@@ -96,7 +96,7 @@ $(function(){
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "iDisplayLength": 5,
+            "iDisplayLength": 10,
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },

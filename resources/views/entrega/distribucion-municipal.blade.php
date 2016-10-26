@@ -3,7 +3,7 @@
 @section('content')
 <section class="content-header">
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-folder-open"></i> Intervenciones</a></li>
+        <li><a href="#"><i class="fa fa-folder-open"></i>Distribución Municipal</a></li>
         <li class="active">{{-- $consolidado->nombre --}}</li>
     </ol>
 </section><br>
@@ -15,18 +15,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="btn-group">
-                              <!-- data-toggle='tooltip' data-placement='top' title='Ver Detalle' -->
-                                <a id='add' class='btn btn-default'>
-                                  <span class="glyphicon glyphicon-open-file" aria-hidden="true"></span>
-                                  Crear Intervención
-                                </a>
-                                <!--<a id="agrupar" href="#" class="btn btn-default" aria-label="Left Align">
-                                  <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
-                                  Agrupar de Intervenciones
-                                </a>-->
-                                <!--<a id='add' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Descargar'>
-                                    <span class='glyphicon glyphicon-cloud-download' aria-hidden='true'></span>
-                                </a>-->
+                              <h3>Distribución Municipal <h5>Departamento de DeFruta y Agroindustria</h5></h3>
                             </div>
                         </div>
                     </div>
@@ -37,17 +26,17 @@
                     <table id="grid-paises" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Año</th>
-                                <th>Orden</th>
                                 <th>Departamento</th>
-                                <th>Base Legal</th>
-                                <th>Insumo</th>
+                                <th>Municipio</th>
+                                <th>Insumos</th>
+                                <th>Beneficiarios</th>
+                                <!--<th>Base Legal</th>
+                                <th>Insumo</th>-->
                                 <th></th>
                             </tr>
                         </thead>
                         <tfoot>
-                            <tr>
+                            <!--<tr>
                                 <th>ID</th>
                                 <th>Año</th>
                                 <th>Orden</th>
@@ -55,7 +44,7 @@
                                 <th>Base Legal</th>
                                 <th>Insumo</th>
                                 <th></th>
-                            </tr>
+                            </tr>-->
                         </tfoot>
                     </table>
                 </div>
@@ -74,8 +63,11 @@ function editar(edit){
 function descargar(edit){
     location.href = "{{ url('detalle-intervencion/export/') }}"+"/"+edit;
 }
-function detalleIntervencion(edit){
-    location.href = "{{ url('intervenciones/detalle-intervencion') }}"+"/"+edit;
+function crearMovimiento(edit){
+    "<?php $jefatura =  \App\User::usuarioToJefatura(); ?>";
+    url = "<?php echo  url('entregas/distribucion-municipal/'.$jefatura.'/eventos/');?>";
+
+    location.href = url+'/'+edit;
 }
 function remove(data){
     $.ajax({
@@ -116,9 +108,9 @@ function agregarGrupo(){
 function getGrid(flag){
   $('#grid-paises').DataTable({
       "order": [[ 0, "desc" ]],
-      "ajax": "{{ url('intervenciones/listado/todo/') }}",
+      "ajax": "{{ url('entregas/distribucion-municipal/todo-distribucion') }}",
       "columnDefs": [
-          {
+          /*{
               "targets": 0,
               "visible": (flag)? false:true,
               "data": "id_intervencion",
@@ -126,22 +118,25 @@ function getGrid(flag){
                   check = "<input type='checkbox' class='checkbox-interv' item='"+data+"'>"
                   return "<div class='pull-right'>" + check + "</div>";
               }
-          },
-          { "data": "anio", "targets": 1 },
-          { "data": "orden", "targets": 2 , "visible":false},
+          },*/
+          { "data": "departamento", "targets": 0 },
+          { "data": "municipio", "targets": 1 },
+          { "data": "kit_insumo", "targets": 2 },
+          { "data": "otorgados", "targets": 3 },
+          /*{ "data": "orden", "targets": 2 , "visible":false},
           { "data": "departamento", "targets": 3 },
           { "data": "nombre_intervencion", "targets": 4 },
-          { "data": "insumo", "targets": 5 },
+          { "data": "insumo", "targets": 5 },*/
           {
-              "targets": 6,
-              "data": "id_intervencion",
+              "targets": 4,
+              "data": "id_grupo",
               "visible": (flag)? true:false,
               "render": function ( data, type, full, meta ) {
-                  intv = "<a href='javascript:detalleIntervencion("+data+")' id='edit' class='btn btn-warning btn-sm' data-toggle='tooltip' data-placement='top' title='Detalles de Intervención'><span class='glyphicon glyphicon-folder-open' aria-hidden='true'></span></a>";
+                  intv = "<a href='javascript:crearMovimiento("+data+")' id='edit' class='btn btn-primary btn-sm' data-toggle='tooltip' data-placement='top' title='Crear Eventos'><span class='glyphicon glyphicon-home' aria-hidden='true'></span></a>";
                   edit = "<a id='edit' href='javascript:editar("+data+")' class='btn btn-primary btn-sm' data-toggle='tooltip' data-placement='top' title='Editar Intervención'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
                   download = "<a href='javascript:descargar("+data+")'  id='edit' class='btn btn-success btn-sm' data-toggle='tooltip' data-placement='top' title='Descargar detalle de Intervención'><span class='glyphicon glyphicon-cloud-download' aria-hidden='true'></span></a>";
                   del = "<a class='btn btn-danger btn-sm' data-toggle='tooltip' data-placement='top' title='Borrar Intervención'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a>";
-                  return "<div class='pull-right'>" + intv + edit + download + del + "</div>";
+                  return "<div class='pull-right'>" + intv + "</div>";
               }
           },
       ],

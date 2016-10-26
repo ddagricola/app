@@ -17,8 +17,49 @@ Route::get('/', function () {
 });
 
 Route::auth();
-
 Route::get('/home', 'HomeController@index');
+
+//--- rutas actualizadas para manejo de entregas de insumos ---//
+Route::group(['prefix'=>'entregas','middleware'=>'auth'], function(){
+  Route::group(['prefix'=>'distribucion-municipal','middleware'=>'auth'], function(){
+
+    //ruta para renderizar de distribuciones municipales, view: entrega.distribucion-municipal
+    Route::get('{jefatura}/municipios', 'GrupoIntervencionController@distribucionMunicipal');
+
+    //ruta para listado de distribuciones municipales, via ajax desde view: entrega.distribucion-municipal
+    Route::get('todo-distribucion','GrupoIntervencionController@todoDistribucionMunicipal');
+
+    //ruta para renderizar listado de eventos creados por municipio según su distribución municipal
+    // view: entrega.distribucion-comunidad
+    Route::get('{jefatura}/eventos/{id}', 'GrupoIntervencionController@distribucionComunidad');
+
+    //ruta para listado de distribuciones por eventos/comunidad, via ajax desde view: entrega.distribucion-comunidad
+    Route::get('todo-distribucion-comunidad/{id}','GrupoIntervencionController@todoDistribucionComunidad');
+
+    //ruta para renderizar listado de distribución por eventos
+    // view: entrega.distribucion-evento
+    Route::get('{jefatura}/eventos-distribucion/{id}', 'GrupoIntervencionController@distribucionEvento');
+
+    //ruta para recibir una distribución del evento
+    // view: entrega.modal-distribucion-evento
+    Route::post('nuevo-distribucion-evento', 'GrupoIntervencionController@NuevaDistribucionEvento');
+
+    //ruta para listado de distribuciones de ventos, via ajax desde view: entrega.distribucion-municipal
+    Route::get('todo-distribucion-evento/{id}','GrupoIntervencionController@todoDistribucionEvento');
+
+    //ruta para renderizar el formulario de ingreso de Beneficiarios
+    Route::get('{jefatura}/ingreso-beneficiario/{id}','GrupoIntervencionController@beneficiarioIngreso');
+
+    //ruta para post de ingreso de beneficiario
+    Route::post('beneficiario/ingreso', 'DistribucionController@ingresoBeneficiario');
+
+    //Ruta para listado de recursos
+    Route::get('{jefatura}/recursos/{id}','GrupoIntervencionController@recursosDistribucion');
+
+    Route::get('{jefatura}/planilla-unica/{id}','GrupoIntervencionController@descargaPlanillaUnica');
+    Route::get('{jefatura}/planilla-general/{id}','GrupoIntervencionController@descargaPlanillaGeneral');
+  });
+});
 
 Route::get('beneficiario/cui', 'DistribucionController@oldBeneficiario');
 Route::get('beneficiario/edad', 'DistribucionController@edadBeneficiario');
@@ -274,6 +315,4 @@ Route::group(['prefix'=>'grupos/tecnicos/','middleware'=>'auth'], function(){
 	Route::get("exportar/boletas/{id}", 'MovimientoController@exportarBoletasBeneficiarios');
 	Route::get("configuracion/restauracion",'UsuarioController@createRestaurarContrasena');
 	Route::post("configuracion/restauracion-save",'UsuarioController@storeRestaurarContrasena');
-	//Route::get("exportar/boletas/{id}", "");
-
 });

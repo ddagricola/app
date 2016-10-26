@@ -172,7 +172,9 @@ class MovimientoController extends Controller
         }
 
         //return redirect()->action('MovimientoController@movimientoMunicipal',[$request->id_municipio, $request->id_detalle_intervencion]);
-        return redirect()->action('MovimientoController@listadoEntregas',[$request->id_grupo_intervencion]);
+        //return redirect()->action('MovimientoController@listadoEntregas',[$request->id_grupo_intervencion]);
+        $jefatura =  \App\User::usuarioToJefatura();
+        return redirect()->action('GrupoIntervencionController@distribucionComunidad',[$jefatura,$request->id_grupo_intervencion]);
         /*******
         $movimiento = new Movimiento;
                 $movimiento->id_comunidad = $request->id_comunidad;
@@ -283,13 +285,15 @@ class MovimientoController extends Controller
         array_push($pages,$pagesItem);
 
         //return view('movimiento.boleta-beneficiarios-evento',['pages'=>$pages]);die;
+        $customPaper = array(0,0,612.283464567,935.433070866);
+
         $pdf = \PDF::loadView('movimiento.boleta-beneficiarios-evento',
             [
 
             'movimiento'=>$movimientoObject,
             'jefeDepartamental'=>$jefeDepartamental[0],
             'pages'=>$pages,
-            ])->setPaper("A4"); //,"landscape"
+          ])->setPaper($customPaper);//->setPaper("A4"); //,"landscape"
         return $pdf->download("boletas".substr(\Crypt::encrypt($id), 0, 9).'.pdf');
     }
     public function eventoBeneficiarios($id){

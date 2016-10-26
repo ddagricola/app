@@ -63,7 +63,7 @@ class IntervencionController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $intervencion = new Intervencion;
         $intervencion->id_consolidado = null; //$request->id_consolidado;
         $intervencion->id_tipo_intervencion = $request->id_tipo_intervencion;
@@ -78,6 +78,7 @@ class IntervencionController extends Controller
         $intervencion->fecha_creacion = Carbon::now();
         $intervencion->email_creacion = (isset(Auth::user()->email)) ? Auth::user()->email : 'guest' ;
         $intervencion->ip_creacion = $request->ip();
+        //$intervencion->id_jefatura = (isset(Auth::user()->id_jefatura)) ? null ;
         $intervencion->orden = (int) $request->orden;
         $intervencion->anio = $request->anio;
         $intervencion->save();

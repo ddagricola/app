@@ -28,7 +28,7 @@ class Jefatura extends Model
 
     public function scopeJefaturaToDireccion($query){
         $tableName = 'jefatura';
-        return   
+        return
             DB::table($tableName)
             ->join('direccion', 'direccion.id', '=', $tableName.'.id_direccion')
             ->join('ministerio', 'ministerio.id', '=', 'direccion.id_ministerio')
@@ -38,10 +38,11 @@ class Jefatura extends Model
                     direccion.nombre as direccion,
                     ministerio.nombre as ministerio,
                     ministerio.siglas as siglas_ministerio,
-                    jefatura.* 
+                    jefatura.*
                     ")
                 )
             ->where($tableName.'.estado', '=', 1)
-            ->get();    
+            ->get();
     }
+
 }

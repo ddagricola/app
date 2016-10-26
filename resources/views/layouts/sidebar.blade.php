@@ -60,7 +60,14 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('intervencion-entregas/listado') }}">
+                        <!--<a href="{{ url('intervencion-entregas/listado') }}">
+                            <i class="fa fa-folder-o"></i>
+                            <span>Entregas</span>
+                        </a>-->
+                        <?php
+                          $jefaturaSession = \App\User::usuarioToJefatura();
+                        ?>
+                        <a href="{{ url('entregas/distribucion-municipal/'.$jefaturaSession.'/municipios') }}">
                             <i class="fa fa-folder-o"></i>
                             <span>Entregas</span>
                         </a>
@@ -85,12 +92,25 @@
                         </a>
                     </li>-->
                 @elseif(Auth::user()->id_rol == 3)
-                  <li>
+                <li>
+                    <!--<a href="{{ url('intervencion-entregas/listado') }}">
+                        <i class="fa fa-folder-o"></i>
+                        <span>Entregas</span>
+                    </a>-->
+                    <?php
+                      $jefaturaSession = \App\User::usuarioToJefatura();
+                    ?>
+                    <a href="{{ url('entregas/distribucion-municipal/'.$jefaturaSession.'/municipios') }}">
+                        <i class="fa fa-folder-o"></i>
+                        <span>Entregas</span>
+                    </a>
+                </li>
+                  <!--<li>
                       <a href="{{ url('intervencion-entregas/listado') }}">
                           <i class="fa fa-folder-o"></i>
                           <span>Entregas</span>
                       </a>
-                  </li>
+                  </li>-->
                     <!--<li>
                         <a href="{{ url('distribuciones/departamentos') }}">
                             <i class="fa fa-folder-o"></i>

@@ -40,13 +40,18 @@ class Beneficiario extends Model
     }
     public static function alls(){
     	return DB::select(DB::raw("
-    		select 
+    		select
 				mg_municipio.nombre as mun,
 				mg_departamento.nombre as dep,
 				mg_beneficiario.*
-				 from mg_beneficiario join 
+				 from mg_beneficiario join
 					mg_municipio on mg_municipio.id = mg_beneficiario.id_municipio
 				    join mg_departamento on mg_departamento.id = mg_municipio.id_departamento limit 200
     	"));
     }
+		public static function cuiImpresion($value){
+			$first =  substr_replace($value, '-', 4, 0);
+			$next = substr_replace($first, '-', 10, 0);
+			return $next;
+		}
 }
