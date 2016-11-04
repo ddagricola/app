@@ -1,4 +1,6 @@
-<?php ini_set('memory_limit', '-1'); ?>
+<?php //ini_set('memory_limit', '-1'); ?>
+<?php //ini_set('max_execution_time', '-1'); ?>
+
 <style type="text/css">
   html{
     margin: 0px;
@@ -110,7 +112,7 @@
 				</table>
         <!-- titulo de planilla unica -->
         <div class="titulo-boleta">
-          <span>PLANILLA ÚNICA DE BENEFICIARIO - {{ $item->tipo_insumo }} </span>
+          <span>PLANILLA <!--ÚNICA--> DE BENEFICIARIO - {{ $item->tipo_insumo }} </span>
         </div>
         <div class="titulo-leyenda">
           <span>
@@ -302,6 +304,10 @@
                   <span class="line-data-tittle-value">
                     {{-- $item->cantidad_parcial --}} {{-- $item->unidad_entrega --}} {{ $item->insumo }}
                   </span>
+                  @elseif (Auth::user()->id_jefatura == 5) <!-- horticultura -->
+                  <span class="line-data-tittle-value">
+                    {{ $item->insumo }}
+                  </span>
                   @else
                   <span class="line-data-tittle-value">
                     {{ $item->cantidad_parcial }} {{ $item->tipo_insumo }}
@@ -335,9 +341,9 @@
             </td>
             <td style="width:2%"></td>
             <td>
-              <div style="width:100%; text-align:center"><span>Firma de Técnico Responsable</span></div>
+              <div style="width:100%; text-align:center"><span>Firma de Extensionista o Técnico Responsable</span></div>
               <div style="width:100%; text-align:center; font-size:10px"><span>NOMBRE: {{$movimiento->nombre_extensionista}}</span></div>
-              <div style="width:100%; text-align:center;font-size:10px"><span>DPI: {{$movimiento->cui_extensionista}} TELÉFONO: {{$movimiento->telefono_extensionista}}</span></div>
+              <div style="width:100%; text-align:center;font-size:10px"><span><!--DPI: {{$movimiento->cui_extensionista}}--> TELÉFONO: 11111111{{$movimiento->telefono_extensionista}}</span></div>
             </td>
             <td style="width:2%"></td>
             <td>

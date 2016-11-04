@@ -156,6 +156,8 @@ class GrupoIntervencionController extends Controller
     }
 
     public function descargaPlanillaUnica($jefatura, $id){
+      ini_set('memory_limit', '-1');
+      ini_set('max_execution_time', '-1');
 
           $data = \App\MovimientoBeneficiario::beneficiariosIngresoEvento($id);
           //$movimiento = \App\Movimiento::find($id);
